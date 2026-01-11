@@ -5,7 +5,7 @@ class_name Account extends Resource
 @export var name: String
 
 ## Transcaction categories which represent positive increments in money.
-@export var income_categories: Array[TransactionCategory]
+@export var income_categories: Array[TransactionCategory] = []
 
 ## Transaction categories which represent negative increments in money.
-@export var expense_categories: Array[TransactionCategory]
+@export var expense_categories: Array[TransactionCategory] = []

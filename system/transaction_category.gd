@@ -8,10 +8,10 @@ class_name TransactionCategory extends Resource
 @export var _icon_name: String
 
 ## Transactions belonging to this category.
-@export var transactions: Array[Transaction]
+@export var transactions: Array[Transaction] = []
 
 ## Reocurring transactions which will be applied onto this category.
-@export var recurring_transactions: Array[ReocurringTransaction]
+@export var recurring_transactions: Array[ReocurringTransaction] = []
 
 func get_icon () -> String:
 	return _icon_name
@@ -28,5 +28,5 @@ static func get_available_icons () -> Array[String]:
 	return [
 		"ankh","apple-whole","archway","baby-carriage","bacterium","bag-shopping","bed",
 		"brain","dice-d20","city","euro-sign","hand-fist","hand-holding-heart","hat-wizard",
-		"paw","people-group","poop","pump-soap","transgender","tree"
+		"paw","people-group","pump-soap","transgender","train-subway","tree"
 	]

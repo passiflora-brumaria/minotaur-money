@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Navigation="*res://autoload/navigation.gd"
+AppData="*res://autoload/app_data.gd"
 
 [display]
 
@@ -38,6 +39,10 @@ theme/custom="uid://cmmyw1une82dn"
 
 pointing/emulate_touch_from_mouse=true
 pointing/emulate_mouse_from_touch=false
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://i18n/i18n.ca.translation", "res://i18n/i18n.en.translation", "res://i18n/i18n.es.translation")
 
 [rendering]
 
