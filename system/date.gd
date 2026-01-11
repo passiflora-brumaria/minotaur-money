@@ -19,6 +19,12 @@ func from_dictionary (source: Dictionary) -> void:
 	if source.has("day"):
 		day = source.get("day")
 
+## Parses a date from a dictionary, like the one returned by [method Time.get_date_dict_from_system].
+static func parse_dict (source: Dictionary) -> Date:
+	var newd: Date = Date.new()
+	newd.from_dictionary(source)
+	return newd
+
 ## Writes onto this date from an ISO 8601 date string.
 func from_iso_string (source: String) -> void:
 	if (source.length() >= 10) && (source.substr(4,1) == "-") && (source.substr(7,1) == "-"):
@@ -26,9 +32,21 @@ func from_iso_string (source: String) -> void:
 		month = int(source.substr(5,2))
 		day = int(source.substr(8,2))
 
+## Parses a date from an ISO 8601 date string.
+static func parse_iso (source: String) -> Date:
+	var newd: Date = Date.new()
+	newd.from_iso_string(source)
+	return newd
+
 ## Writes onto this date from the current OS date.
 func from_current (utc: bool = false) -> void:
 	from_dictionary(Time.get_date_dict_from_system(utc))
+
+## Gets the current date.
+static func now (utc: bool = false) -> Date:
+	var newd: Date = Date.new()
+	newd.from_current(utc)
+	return newd
 
 ## Reads from this date onto an ISO 8601 date string.
 func to_iso_string () -> String:

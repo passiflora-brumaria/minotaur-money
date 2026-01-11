@@ -8,10 +8,10 @@ class_name TransactionCategory extends Resource
 @export var _icon_name: String
 
 ## Transactions belonging to this category.
-@export var transactions: Array
+@export var transactions: Array[Transaction]
 
-## Reocurring transactions which will be applies onto this category.
-@export var recurring_transactions: Array
+## Reocurring transactions which will be applied onto this category.
+@export var recurring_transactions: Array[ReocurringTransaction]
 
 func get_icon () -> String:
 	return _icon_name
