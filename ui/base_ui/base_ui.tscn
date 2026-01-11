@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://blvi2pwe0a4i7"]
+
+[ext_resource type="Script" uid="uid://cww676xfuuatn" path="res://ui/base_ui/base_ui.gd" id="1_j6jlw"]
+[ext_resource type="FontFile" uid="uid://fupb1gof1t0f" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_ymnqm"]
+[ext_resource type="Script" uid="uid://mpnoxbxbwvk4" path="res://addons/fontawesome/FontAwesome.gd" id="3_c4sxj"]
+
+[node name="BaseUi" type="Node"]
+script = ExtResource("1_j6jlw")
+
+[node name="MainUiLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="PanelContainer" parent="MainUiLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FontAwesome" type="Label" parent="MainUiLayer/Background"]
+auto_translate_mode = 2
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_ymnqm")
+theme_override_font_sizes/font_size = 98
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_c4sxj")
+icon_size = 98
+icon_name = "transgender"
+metadata/_custom_type_script = "uid://mpnoxbxbwvk4"
+
+[node name="FloatingActionButtonLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="FloatingActionButtonLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="ModalLayer" type="CanvasLayer" parent="."]
+layer = 3
+visible = false
