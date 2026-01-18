@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://gmbik3cjmntn"]
+
+[node name="SolidButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "aaa"

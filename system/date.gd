@@ -51,3 +51,20 @@ static func now (utc: bool = false) -> Date:
 ## Reads from this date onto an ISO 8601 date string.
 func to_iso_string () -> String:
 	return str(year).pad_zeros(4) + "-" + str(month).pad_zeros(2) + "-" + str(day).pad_zeros(2)
+
+## Gets whether this date is prior to another.
+func is_prior_to (other: Date, or_equal: bool = false) -> bool:
+	if year == other.year:
+		if month == other.year:
+			if day == other.day:
+				return or_equal
+			else:
+				return day < other.day
+		else:
+			return month < other.month
+	else:
+		return year < other.year
+
+## Gets whether this is the same date as another.
+func equals (other: Date) -> bool:
+	return (year == other.year) && (month == other.month) && (day == other.day)

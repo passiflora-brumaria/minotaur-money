@@ -20,10 +20,10 @@ func _on_page_changed (page: Control, fab: Control) -> void:
 func _ready () -> void:
 	Navigation.page_requested.connect(_on_page_changed)
 	#TEST ONLY
-	print(Decimal.parse("0.001").is_lesser_than(Decimal.parse("0.1")))
-	print(Decimal.add([Decimal.parse("0.0001"),Decimal.parse("-0.2")]))
-	print(Decimal.add([Decimal.parse("3.01"),Decimal.parse("-1.01"),Decimal.parse("1.108"),Decimal.parse("7.003"),Decimal.parse("-5.0001"),Decimal.parse("-6")]).to_string())
-	print(Decimal.add([Decimal.parse("0"),Decimal.parse("-0.1")]))
+	print(Decimal.parse("0.001",".").is_lesser_than(Decimal.parse("0.1",".")))
+	print(Decimal.add([Decimal.parse("0.0001","."),Decimal.parse("-0.2",".")]))
+	print(Decimal.add([Decimal.parse("3.01","."),Decimal.parse("-1.01","."),Decimal.parse("1.108","."),Decimal.parse("7.003","."),Decimal.parse("-5.0001","."),Decimal.parse("-6",".")]).to_string())
+	print(Decimal.add([Decimal.parse("0","."),Decimal.parse("-0.1",".")]))
 
 func _exit_tree () -> void:
 	Navigation.page_requested.disconnect(_on_page_changed)

@@ -1,12 +1,15 @@
 extends Node
 
+## Signal emitted when changes are made to the app's data. It fires a reference to the data.
+signal data_changed (data_ref: UserData)
+
 ## User data.
 var data: UserData
 
 func _load_defaults () -> void:
 	var groceries := TransactionCategory.new()
 	groceries.name = tr("DATADEFAULTS_CATEGORY_GROCERIES")
-	groceries.set_icon("bag-shopping")
+	groceries.set_icon("apple-whole")
 	var transportation := TransactionCategory.new()
 	transportation.name = tr("DATADEFAULTS_CATEGORY_TRANSPORTATION")
 	transportation.set_icon("train-subway")
@@ -37,3 +40,9 @@ func _ready () -> void:
 	else:
 		data = UserData.new()
 		_load_defaults()
+		ResourceSaver.save(data,"user://data.tres")
+
+## Notify all subscriptors that changes have been made to the data.
+func notify_changes () -> void:
+	data_changed.emit(data)
+	ResourceSaver.save(data,"user://data.tres")

@@ -11,9 +11,10 @@ class_name Decimal extends Resource
 @export var _is_negative: bool
 
 ## Parse a decimal number from a string.
-static func parse (string: String, decimal_delimiter: String = ".") -> Decimal:
+static func parse (string: String, decimal_delimiter: String = ",") -> Decimal:
 	var read_decimal := Decimal.new()
 	var terms: PackedStringArray = string.split(decimal_delimiter)
+	terms[0] = terms[0].replace(" ","")
 	if len(terms) == 1:
 		read_decimal._integer_part = int(terms[0])
 		read_decimal._decimal_part = [0,0]
@@ -100,11 +101,21 @@ static func add (factors: Array[Decimal]) -> Decimal:
 	result._get_decimal_part_string()
 	return result
 
+## Returns a copy of this number.
+func copy () -> Decimal:
+	return duplicate_deep(DEEP_DUPLICATE_ALL)
+
 ## Returns the absolute value of this number.
 func get_absolute_value () -> Decimal:
-	var copy: Decimal = duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
-	copy._is_negative = false
-	return copy
+	var n: Decimal = copy()
+	n._is_negative = false
+	return n
+
+## Returns the opposite of this number (same absolute value, inverted sign).
+func opposite () -> Decimal:
+	var n: Decimal = copy()
+	n._is_negative = !n._is_negative
+	return n
 
 ## Returns whether this number is lesser than another.
 func is_lesser_than (other: Decimal) -> bool:
@@ -134,6 +145,16 @@ func is_lesser_than (other: Decimal) -> bool:
 	else:
 		return (_integer_part * (-1 if _is_negative else 1)) < (other._integer_part * (-1 if other._is_negative else 1))
 
+func _get_integer_part_string (separate_e3: bool = true) -> String:
+	var result = str(_integer_part)
+	if separate_e3:
+		var processed_characters: int = 0
+		while len(result) > (processed_characters + 3):
+			processed_characters += 3
+			result.insert(len(result) - processed_characters," ")
+			processed_characters += 1
+	return result
+
 func _get_decimal_part_string () -> String:
 	while (len(_decimal_part) > 0) && (_decimal_part[len(_decimal_part) - 1] == 0):
 		_decimal_part.remove_at(len(_decimal_part) - 1)
@@ -142,10 +163,10 @@ func _get_decimal_part_string () -> String:
 		result += str(digit)
 	return result
 
-func _to_string (decimal_separator: String = ".") -> String:
+func _to_string (decimal_separator: String = ",", separate_thousands: bool = true) -> String:
 	var prefix: String = "-" if _is_negative else ""
 	var decimal_string: String = _get_decimal_part_string()
 	if len(decimal_string) == 0:
-		return prefix + str(_integer_part)
+		return prefix + _get_integer_part_string(separate_thousands)
 	else:
-		return prefix + str(_integer_part) + decimal_separator + decimal_string
+		return prefix + _get_integer_part_string(separate_thousands) + decimal_separator + decimal_string

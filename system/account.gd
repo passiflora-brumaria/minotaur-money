@@ -4,8 +4,27 @@ class_name Account extends Resource
 ## Name of the account.
 @export var name: String
 
+## Starting balance of the account at time of creation in the app.
+@export var starting_balance: Decimal = Decimal.construct(0,[],false)
+
 ## Transcaction categories which represent positive increments in money.
 @export var income_categories: Array[TransactionCategory] = []
 
 ## Transaction categories which represent negative increments in money.
 @export var expense_categories: Array[TransactionCategory] = []
+
+## Returns the balance of this account.
+func get_balance (as_of: Date) -> Decimal:
+	var query = as_of.duplicate_deep(DEEP_DUPLICATE_ALL)
+	if query == null:
+		query = Date.now()
+	var sum: Decimal = starting_balance.copy()
+	for ic in income_categories:
+		for t in ic.transactions:
+			if t.date.is_prior_to(query,true):
+				sum = Decimal.add([sum,t.value.get_absolute_value()])
+	for ec in expense_categories:
+		for t in ec.transactions:
+			if t.date.is_prior_to(query,true):
+				sum = Decimal.add([sum,t.value.get_absolute_value().opposite()])
+	return sum
