@@ -1,4 +1,5 @@
 keys,en,es,ca
+APP_NAME,Moneytaur,Huchatauro,Dinertaure
 DATADEFAULTS_CATEGORY_GROCERIES,Groceries,Compras de Casa,Compres de Casa
 DATADEFAULTS_CATEGORY_TRANSPORTATION,Transportation,Transporte,Transport
 DATADEFAULTS_CATEGORY_CHARITY,Charity,Donaciones,Donacions
@@ -20,3 +21,6 @@ MONTH_10,October,Octubre,Octubre
 MONTH_11,November,Noviembre,Novembre
 MONTH_12,December,Diciembre,Desembre
 CURRENT_MONTH_TITLE,Current Month,Mes Actual,Mes Actual
+MONTH_INCOME,Income,Ganancias,Guanys
+MONTH_EXPENSES,Expenses,Gastos,Despeses
+ADD_TRANSACTION_TITLE,Add Transaction,Añadir Transacción,Afegir Transacció

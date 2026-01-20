@@ -9,3 +9,7 @@ class_name Transaction extends Resource
 
 ## Date at which the transaction occurred.
 @export var date: Date
+
+## Gets a copy of this transaction.
+func copy () -> Transaction:
+	return duplicate_deep(Resource.DEEP_DUPLICATE_ALL)

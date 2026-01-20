@@ -23,6 +23,15 @@ func set_icon (icon_name: String) -> Error:
 	else:
 		return Error.FAILED
 
+## Gets the value accrued on this category between two points in time, inclusive. Leave a query limit null to not limit the checked timespan in its end.
+func get_value (query_beginning: Date, query_ending: Date) -> Decimal:
+	var sum: Decimal = Decimal.construct(0,[],false)
+	for t in transactions:
+		if (query_beginning == null) || query_beginning.is_prior_to(t.date,true):
+			if (query_ending == null) || t.date.is_prior_to(query_ending,true):
+				sum = Decimal.add([sum,t.value.get_absolute_value()])
+	return sum
+
 ## Gets a list of available category icons.
 static func get_available_icons () -> Array[String]:
 	return [

@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://3374gqlldcdd"]
+
+[ext_resource type="FontFile" uid="uid://fupb1gof1t0f" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="1_fjnh4"]
+[ext_resource type="FontFile" uid="uid://ikpk0y12oeif" path="res://themes/normal_regular.ttf" id="1_iwp8r"]
+[ext_resource type="Script" uid="uid://lae2n1mlgbwj" path="res://ui/components/category_display/category_display.gd" id="1_kfigc"]
+[ext_resource type="Script" uid="uid://mpnoxbxbwvk4" path="res://addons/fontawesome/FontAwesome.gd" id="2_e0tgm"]
+[ext_resource type="Script" uid="uid://coh8ytklcqd2k" path="res://system/reocurring_transaction.gd" id="2_ils17"]
+[ext_resource type="Script" uid="uid://dwpyqy0hq2ylq" path="res://system/transaction_category.gd" id="3_h7ti6"]
+[ext_resource type="Script" uid="uid://d0sa2ffb7xjx7" path="res://system/transaction.gd" id="4_dbjd5"]
+[ext_resource type="FontFile" uid="uid://8j3w1e1gsnrl" path="res://themes/normal_bold.ttf" id="4_kfigc"]
+
+[sub_resource type="Resource" id="Resource_m8bvo"]
+script = ExtResource("3_h7ti6")
+name = "OwO"
+_icon_name = "dice-d20"
+metadata/_custom_type_script = "uid://dwpyqy0hq2ylq"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwp8r"]
+bg_color = Color(0.99607843, 0.98039216, 0.8784314, 1)
+corner_radius_top_left = 500
+corner_radius_top_right = 500
+corner_radius_bottom_right = 500
+corner_radius_bottom_left = 500
+
+[node name="CategoryDisplay" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("1_kfigc")
+_category = SubResource("Resource_m8bvo")
+_category_colour = Color(0.48660433, 0.0005703494, 0.5777799, 1)
+_background_colour = Color(1, 1, 1, 1)
+
+[node name="CategoryStack" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CategoryTitle" type="Label" parent="CategoryStack"]
+custom_minimum_size = Vector2(175, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_iwp8r")
+theme_override_font_sizes/font_size = 28
+text = "Ayuwoki rerere owo"
+horizontal_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="IconMarginTop" type="MarginContainer" parent="CategoryStack"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="IconPanelCenterer" type="CenterContainer" parent="CategoryStack"]
+layout_mode = 2
+
+[node name="CategoryIconPanel" type="PanelContainer" parent="CategoryStack/IconPanelCenterer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_iwp8r")
+
+[node name="CategoryIconCenterer" type="CenterContainer" parent="CategoryStack/IconPanelCenterer/CategoryIconPanel"]
+layout_mode = 2
+
+[node name="FontAwesome" type="Label" parent="CategoryStack/IconPanelCenterer/CategoryIconPanel/CategoryIconCenterer"]
+auto_translate_mode = 2
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("1_fjnh4")
+theme_override_font_sizes/font_size = 64
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_e0tgm")
+icon_size = 64
+icon_name = "transgender"
+metadata/_custom_type_script = "uid://mpnoxbxbwvk4"
+
+[node name="IconMarginBottom" type="MarginContainer" parent="CategoryStack"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="Value" type="Label" parent="CategoryStack"]
+custom_minimum_size = Vector2(175, 60)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_kfigc")
+theme_override_font_sizes/font_size = 24
+text = "60.51 €"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true

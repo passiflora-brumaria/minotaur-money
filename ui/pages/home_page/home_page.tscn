@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgkrpm68b2ule"]
+[gd_scene load_steps=9 format=3 uid="uid://cgkrpm68b2ule"]
 
 [ext_resource type="Script" uid="uid://dn11tc8bj44gr" path="res://ui/pages/home_page/home_page.gd" id="1_hsy1c"]
 [ext_resource type="PackedScene" uid="uid://gmbik3cjmntn" path="res://ui/components/solid_button/solid_button.tscn" id="2_6js20"]
 [ext_resource type="Texture2D" uid="uid://2iwcqsdgjv83" path="res://icons/chevron-down-solid.svg" id="3_0jqb6"]
 [ext_resource type="FontFile" uid="uid://cq8smpmg7jsjj" path="res://themes/heading.ttf" id="4_2d0r1"]
+[ext_resource type="FontFile" uid="uid://8j3w1e1gsnrl" path="res://themes/normal_bold.ttf" id="5_pfqo7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2d0r1"]
 bg_color = Color(0.99607843, 0.99607843, 0.99607843, 1)
@@ -11,6 +12,16 @@ corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfqo7"]
+bg_color = Color(0.8, 0.8352941, 0.68235296, 1)
+corner_radius_top_left = 400
+corner_radius_bottom_left = 400
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ut67i"]
+bg_color = Color(0.83137256, 0.6392157, 0.4509804, 1)
+corner_radius_top_right = 400
+corner_radius_bottom_right = 400
 
 [node name="HomePage" type="ScrollContainer"]
 anchors_preset = 15
@@ -89,3 +100,105 @@ layout_mode = 2
 text = "February, 2027"
 horizontal_alignment = 1
 clip_text = true
+
+[node name="MonthSeparator" type="MarginContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack"]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+
+[node name="MonthBalance" type="HBoxContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack"]
+layout_mode = 2
+alignment = 1
+
+[node name="MonthIcome" type="PanelContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance"]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pfqo7")
+
+[node name="MonthIncomePadding" type="MarginContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance/MonthIcome"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Row" type="HBoxContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance/MonthIcome/MonthIncomePadding"]
+layout_mode = 2
+alignment = 2
+
+[node name="Column" type="VBoxContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance/MonthIcome/MonthIncomePadding/Row"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance/MonthIcome/MonthIncomePadding/Row/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "MONTH_INCOME"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance/MonthIcome/MonthIncomePadding/Row/Column"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="Amount" type="Label" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance/MonthIcome/MonthIncomePadding/Row/Column"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_pfqo7")
+theme_override_font_sizes/font_size = 56
+text = "12345.67"
+horizontal_alignment = 2
+vertical_alignment = 2
+clip_text = true
+
+[node name="MonthExpenses" type="PanelContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance"]
+custom_minimum_size = Vector2(420, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ut67i")
+
+[node name="MonthIncomePadding" type="MarginContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance/MonthExpenses"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Row" type="HBoxContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance/MonthExpenses/MonthIncomePadding"]
+layout_mode = 2
+
+[node name="Column" type="VBoxContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance/MonthExpenses/MonthIncomePadding/Row"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance/MonthExpenses/MonthIncomePadding/Row/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "MONTH_EXPENSES"
+clip_text = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance/MonthExpenses/MonthIncomePadding/Row/Column"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="Amount" type="Label" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/MonthBalance/MonthExpenses/MonthIncomePadding/Row/Column"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_pfqo7")
+theme_override_font_sizes/font_size = 56
+text = "12345.67"
+vertical_alignment = 2
+clip_text = true
+
+[node name="BalanceMargin" type="MarginContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 60
+
+[node name="AddTrTitle" type="Label" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "ADD_TRANSACTION_TITLE"
+horizontal_alignment = 1
+clip_text = true
+
+[node name="CategoryGrid" type="GridContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack"]
+layout_mode = 2
+columns = 4
