@@ -1,0 +1,186 @@
+[gd_scene load_steps=9 format=3 uid="uid://ls8qt21dow44"]
+
+[ext_resource type="Script" uid="uid://die4l7vae6wcg" path="res://ui/pages/transaction_edit_page/transaction_edit_page.gd" id="1_4q6nx"]
+[ext_resource type="FontFile" uid="uid://fupb1gof1t0f" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_7y5lg"]
+[ext_resource type="Script" uid="uid://coh8ytklcqd2k" path="res://system/reocurring_transaction.gd" id="2_13emb"]
+[ext_resource type="Script" uid="uid://dwpyqy0hq2ylq" path="res://system/transaction_category.gd" id="3_eg1jp"]
+[ext_resource type="Script" uid="uid://mpnoxbxbwvk4" path="res://addons/fontawesome/FontAwesome.gd" id="3_l4jca"]
+[ext_resource type="Script" uid="uid://d0sa2ffb7xjx7" path="res://system/transaction.gd" id="4_qqle1"]
+[ext_resource type="FontFile" uid="uid://8j3w1e1gsnrl" path="res://themes/normal_bold.ttf" id="4_wvm54"]
+
+[sub_resource type="Resource" id="Resource_3n4ql"]
+script = ExtResource("3_eg1jp")
+name = "OwO"
+_icon_name = "dice-d20"
+metadata/_custom_type_script = "uid://dwpyqy0hq2ylq"
+
+[node name="TransactionEditPage" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+script = ExtResource("1_4q6nx")
+_category = SubResource("Resource_3n4ql")
+_category_colour = Color(1, 0.48000002, 0.6533334, 1)
+
+[node name="Stack" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleRow" type="HBoxContainer" parent="Stack"]
+layout_mode = 2
+
+[node name="CategoryIcon" type="Label" parent="Stack/TitleRow"]
+auto_translate_mode = 2
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_7y5lg")
+theme_override_font_sizes/font_size = 64
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_l4jca")
+icon_size = 48
+metadata/_custom_type_script = "uid://mpnoxbxbwvk4"
+
+[node name="TitleGap" type="MarginContainer" parent="Stack/TitleRow"]
+layout_mode = 2
+theme_override_constants/margin_right = 36
+
+[node name="CategoryName" type="Label" parent="Stack/TitleRow"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_wvm54")
+theme_override_font_sizes/font_size = 64
+text = "Category Name"
+vertical_alignment = 2
+clip_text = true
+
+[node name="TitleMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 60
+
+[node name="ValueEdit" type="HBoxContainer" parent="Stack"]
+layout_mode = 2
+
+[node name="Integer" type="LineEdit" parent="Stack/ValueEdit"]
+layout_mode = 2
+text = "0"
+alignment = 2
+virtual_keyboard_type = 2
+
+[node name="Comma" type="Label" parent="Stack/ValueEdit"]
+layout_mode = 2
+text = ","
+
+[node name="Decimal" type="LineEdit" parent="Stack/ValueEdit"]
+layout_mode = 2
+text = "00"
+virtual_keyboard_type = 2
+
+[node name="Currency" type="Label" parent="Stack/ValueEdit"]
+layout_mode = 2
+text = " €"
+
+[node name="ValueMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 80
+
+[node name="NameLabel" type="Label" parent="Stack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "NAME_EDIT_LABEL"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 40
+
+[node name="NameEdit" type="LineEdit" parent="Stack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+
+[node name="NameMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 80
+
+[node name="DateLabel" type="Label" parent="Stack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "DATE_EDIT_LABEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 40
+
+[node name="DateEdit" type="HBoxContainer" parent="Stack"]
+layout_mode = 2
+
+[node name="DaySelect" type="OptionButton" parent="Stack/DateEdit"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+icon_alignment = 2
+expand_icon = true
+selected = 0
+item_count = 2
+popup/item_0/text = "22"
+popup/item_0/id = 0
+popup/item_1/text = "23"
+popup/item_1/id = 1
+
+[node name="DayMonthSeparator" type="Label" parent="Stack/DateEdit"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "/"
+
+[node name="MonthSelect" type="OptionButton" parent="Stack/DateEdit"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+icon_alignment = 2
+expand_icon = true
+selected = 0
+item_count = 2
+popup/item_0/text = "Maig"
+popup/item_0/id = 0
+popup/item_1/text = "23"
+popup/item_1/id = 1
+
+[node name="MonthYearSeparator" type="Label" parent="Stack/DateEdit"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "/"
+
+[node name="YearField" type="LineEdit" parent="Stack/DateEdit"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "8931"
+virtual_keyboard_type = 2
+
+[node name="YearFieldMargin" type="MarginContainer" parent="Stack/DateEdit"]
+layout_mode = 2
+theme_override_constants/margin_right = 80
+
+[node name="DateIcon" type="Label" parent="Stack/DateEdit"]
+auto_translate_mode = 2
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_7y5lg")
+theme_override_font_sizes/font_size = 64
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_l4jca")
+icon_size = 96
+icon_name = "calendar"
+metadata/_custom_type_script = "uid://mpnoxbxbwvk4"
+
+[node name="SubmitMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_top = 160
+
+[node name="Submit" type="Button" parent="Stack"]
+layout_mode = 2
+text = "SAVE_TRANSACTION"

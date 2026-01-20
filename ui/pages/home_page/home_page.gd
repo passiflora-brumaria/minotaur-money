@@ -12,6 +12,8 @@ func set_data (account: Account, date_of_viewing: Date) -> void:
 	_date_of_viewing = date_of_viewing
 
 @onready var _category_view_scene: PackedScene = preload("res://ui/components/category_display/category_display.tscn")
+@onready var _self_scene: PackedScene = preload("res://ui/pages/home_page/home_page.tscn")
+@onready var _transaction_edit_page_scene: PackedScene = preload("res://ui/pages/transaction_edit_page/transaction_edit_page.tscn")
 
 @onready var _account_select: Button = $"./Stack/AccountSelectPadding/AccountSelection"
 @onready var _balance: Label = $"./Stack/CurrentBalancePadding/CurrentBalance"
@@ -21,7 +23,40 @@ func set_data (account: Account, date_of_viewing: Date) -> void:
 @onready var _category_grid: GridContainer = $"./Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/CategoryGrid"
 
 func _on_account_select () -> void:
-	pass # TODO. Implement.
+	print("Select account.") # TODO. Implement.
+
+func _on_category_tapped (category: TransactionCategory, color: Color) -> void:
+	var transaction_page := _transaction_edit_page_scene.instantiate()
+	transaction_page.set_data(self,category,null,color)
+	Navigation.request_page(transaction_page,null)
+
+func _on_category_long_pressed (category: TransactionCategory, color: Color) -> void:
+	print("Category " + category.name + " long pressed!") # TODO. Implement.
+
+func _on_app_data_changed (_data_ref) -> void:
+	_balance.text = _account.get_balance(Date.now()).to_string() + " €"
+	var query_b: Date = _date_of_viewing.copy()
+	query_b.day = 1
+	var query_e: Date = _date_of_viewing.copy()
+	query_e.day = Date.get_last_day_of_month(query_e.year,query_e.month)
+	_monthly_income.text = _account.get_income(query_b,query_e).to_string() + " €"
+	_monthly_expense.text = _account.get_expense(query_b,query_e).to_string() + " €"
+	while _category_grid.get_child_count() > 0:
+		var c := _category_grid.get_child(0)
+		_category_grid.remove_child(c)
+		c.queue_free()
+	for ic in _account.income_categories:
+		var cdisplay := _category_view_scene.instantiate()
+		cdisplay.set_data(ic,query_b,query_e,Color.from_string("#CCD5AE",Color.ALICE_BLUE),Color.from_string("#fefefe",Color.RED))
+		cdisplay.pressed.connect(_on_category_tapped.bind(ic,Color.from_string("#CCD5AE",Color.ALICE_BLUE)))
+		cdisplay.long_pressed.connect(_on_category_long_pressed.bind(ic,Color.from_string("#CCD5AE",Color.ALICE_BLUE)))
+		_category_grid.add_child(cdisplay)
+	for ec in _account.expense_categories:
+		var cdisplay := _category_view_scene.instantiate()
+		cdisplay.set_data(ec,query_b,query_e,Color.from_string("#D4A373",Color.ALICE_BLUE),Color.from_string("#fefefe",Color.RED))
+		cdisplay.pressed.connect(_on_category_tapped.bind(ec,Color.from_string("#D4A373",Color.ALICE_BLUE)))
+		cdisplay.long_pressed.connect(_on_category_long_pressed.bind(ec,Color.from_string("#D4A373",Color.ALICE_BLUE)))
+		_category_grid.add_child(cdisplay)
 
 func _ready () -> void:
 	if _account != null:
@@ -53,11 +88,16 @@ func _ready () -> void:
 	for ic in _account.income_categories:
 		var cdisplay := _category_view_scene.instantiate()
 		cdisplay.set_data(ic,query_b,query_e,Color.from_string("#CCD5AE",Color.ALICE_BLUE),Color.from_string("#fefefe",Color.RED))
+		cdisplay.pressed.connect(_on_category_tapped.bind(ic,Color.from_string("#CCD5AE",Color.ALICE_BLUE)))
+		cdisplay.long_pressed.connect(_on_category_long_pressed.bind(ic,Color.from_string("#CCD5AE",Color.ALICE_BLUE)))
 		_category_grid.add_child(cdisplay)
 	for ec in _account.expense_categories:
 		var cdisplay := _category_view_scene.instantiate()
 		cdisplay.set_data(ec,query_b,query_e,Color.from_string("#D4A373",Color.ALICE_BLUE),Color.from_string("#fefefe",Color.RED))
+		cdisplay.pressed.connect(_on_category_tapped.bind(ec,Color.from_string("#D4A373",Color.ALICE_BLUE)))
+		cdisplay.long_pressed.connect(_on_category_long_pressed.bind(ec,Color.from_string("#D4A373",Color.ALICE_BLUE)))
 		_category_grid.add_child(cdisplay)
+	AppData.data_changed.connect(_on_app_data_changed)
 
 func _exit_tree () -> void:
 	_account_select.pressed.disconnect(_on_account_select)

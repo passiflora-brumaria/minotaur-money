@@ -114,7 +114,7 @@ func add_months (n_months: int) -> void:
 ## Gets whether this date is prior to another.
 func is_prior_to (other: Date, or_equal: bool = false) -> bool:
 	if year == other.year:
-		if month == other.year:
+		if month == other.month:
 			if day == other.day:
 				return or_equal
 			else:

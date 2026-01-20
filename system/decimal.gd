@@ -55,7 +55,7 @@ static func add (factors: Array[Decimal]) -> Decimal:
 	var total_decimal: PackedInt32Array = [0]
 	var is_total_negative: bool = false
 	for factor in factors:
-		print("Adding " + factor.to_string())
+		#print("Adding " + factor.to_string())
 		if factor._is_negative != is_total_negative:
 			var will_cross_sign: bool = construct(total_integer,total_decimal,false).is_lesser_than(factor.get_absolute_value())
 			total_integer -= factor._integer_part
@@ -100,6 +100,17 @@ static func add (factors: Array[Decimal]) -> Decimal:
 	result._is_negative = is_total_negative
 	result._get_decimal_part_string()
 	return result
+
+## Gets the integer part of this number.
+func get_integer_part () -> int:
+	return _integer_part
+
+## Gets the decimal part of this number (the digits after the comma).
+func get_decimal_part () -> String:
+	var dps: String = _get_decimal_part_string()
+	if len(dps) == 0:
+		return "00"
+	return dps
 
 ## Returns a copy of this number.
 func copy () -> Decimal:

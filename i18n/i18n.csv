@@ -24,3 +24,6 @@ CURRENT_MONTH_TITLE,Current Month,Mes Actual,Mes Actual
 MONTH_INCOME,Income,Ganancias,Guanys
 MONTH_EXPENSES,Expenses,Gastos,Despeses
 ADD_TRANSACTION_TITLE,Add Transaction,Añadir Transacción,Afegir Transacció
+NAME_EDIT_LABEL,Description,Descripción,Descripció
+DATE_EDIT_LABEL,Date,Fecha,Data
+SAVE_TRANSACTION,Save,Guardar,Desar
