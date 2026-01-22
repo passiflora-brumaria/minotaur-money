@@ -41,6 +41,18 @@ func _ready () -> void:
 		data = UserData.new()
 		_load_defaults()
 		ResourceSaver.save(data,"user://data.tres")
+	var current_day: Date = Date.now()
+	for acc in data.accounts:
+		for ic in acc.income_categories:
+			for rec in ic.recurring_transactions:
+				var applications: Array[Transaction] = rec.create_appearences(current_day)
+				ic.transactions.append_array(applications)
+			ic.transactions.sort_custom( func (a: Transaction, b: Transaction): return a.date.is_prior_to(b.date) )
+		for ec in acc.expense_categories:
+			for rec in ec.recurring_transactions:
+				var applications: Array[Transaction] = rec.create_appearences(current_day)
+				ec.transactions.append_array(applications)
+			ec.transactions.sort_custom( func (a: Transaction, b: Transaction): return a.date.is_prior_to(b.date) )
 
 ## Notify all subscriptors that changes have been made to the data.
 func notify_changes () -> void:

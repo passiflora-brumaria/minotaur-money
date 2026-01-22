@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3 uid="uid://b3sam71di8476"]
+
+[ext_resource type="Script" uid="uid://dj8urvxfp37v3" path="res://ui/pages/category_view_page/category_view_page.gd" id="1_jj6jg"]
+[ext_resource type="Script" uid="uid://coh8ytklcqd2k" path="res://system/reocurring_transaction.gd" id="2_2im2n"]
+[ext_resource type="Script" uid="uid://dwpyqy0hq2ylq" path="res://system/transaction_category.gd" id="3_erfx6"]
+[ext_resource type="Script" uid="uid://d0sa2ffb7xjx7" path="res://system/transaction.gd" id="4_vx5mu"]
+[ext_resource type="FontFile" uid="uid://fupb1gof1t0f" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="5_3pd2h"]
+[ext_resource type="Script" uid="uid://mpnoxbxbwvk4" path="res://addons/fontawesome/FontAwesome.gd" id="6_kh84y"]
+[ext_resource type="FontFile" uid="uid://8j3w1e1gsnrl" path="res://themes/normal_bold.ttf" id="7_br878"]
+
+[sub_resource type="Resource" id="Resource_3pd2h"]
+script = ExtResource("3_erfx6")
+metadata/_custom_type_script = "uid://dwpyqy0hq2ylq"
+
+[node name="CategoryViewPage" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+script = ExtResource("1_jj6jg")
+_category = SubResource("Resource_3pd2h")
+
+[node name="Stack" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleRow" type="HBoxContainer" parent="Stack"]
+layout_mode = 2
+
+[node name="CategoryIcon" type="Label" parent="Stack/TitleRow"]
+auto_translate_mode = 2
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("5_3pd2h")
+theme_override_font_sizes/font_size = 48
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_kh84y")
+icon_size = 48
+metadata/_custom_type_script = "uid://mpnoxbxbwvk4"
+
+[node name="TitleGap" type="MarginContainer" parent="Stack/TitleRow"]
+layout_mode = 2
+theme_override_constants/margin_right = 36
+
+[node name="CategoryName" type="Label" parent="Stack/TitleRow"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_br878")
+theme_override_font_sizes/font_size = 64
+text = "Category Name"
+vertical_alignment = 2
+clip_text = true
+
+[node name="TitleMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 60

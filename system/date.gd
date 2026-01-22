@@ -95,6 +95,9 @@ func add_days (n_days: int) -> void:
 ## Adds a month to the current date.
 func add_month () -> void:
 	month += 1
+	if month > 12:
+		month = 1
+		year += 1
 	if day > get_last_day_of_month(year,month):
 		day = get_last_day_of_month(year,month)
 

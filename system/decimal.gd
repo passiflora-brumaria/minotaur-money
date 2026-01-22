@@ -52,9 +52,10 @@ static func _invert_decimals (decimals: PackedInt32Array) -> int:
 ## Performs an addition. All factors are assumed to be positive; if they're not, the operation will fail to produce a correct result.
 static func add (factors: Array[Decimal]) -> Decimal:
 	var total_integer: int = 0
-	var total_decimal: PackedInt32Array = [0]
+	var total_decimal: PackedInt32Array = []
 	var is_total_negative: bool = false
 	for factor in factors:
+		factor._get_decimal_part_string()
 		#print("Adding " + factor.to_string())
 		if factor._is_negative != is_total_negative:
 			var will_cross_sign: bool = construct(total_integer,total_decimal,false).is_lesser_than(factor.get_absolute_value())

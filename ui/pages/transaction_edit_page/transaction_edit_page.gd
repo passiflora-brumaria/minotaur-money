@@ -1,7 +1,10 @@
 extends MarginContainer
 
 ## Previous screen in navigation, to which the app should go back after editing is done.
-@export var _previous_screen: Control
+@export var _previous_screen_scene: PackedScene
+
+## Model(s) for the previous screen in navigation.
+@export var _previous_screen_data: Dictionary
 
 ## Category to which the transaction will/does belong.
 @export var _category: TransactionCategory
@@ -12,12 +15,23 @@ extends MarginContainer
 ## Colour to associate to the category to which the transaction will/does belong.
 @export var _category_colour: Color
 
-## Sets the data for this screen.
-func set_data (previous_screen: Control, category: TransactionCategory, transaction: Transaction, category_colour: Color) -> void:
-	_previous_screen = previous_screen
-	_category = category
-	_transaction = transaction
-	_category_colour = category_colour
+## Sets the data for this screen. Expects:
+## "previous_screen_scene": [class PackedScene]
+## "previous_screen_data": [class.Dictionary]
+## "category": [class TransactionCategory
+## "transaction": [class Transaction]
+## "category_colour": [class Color]
+func set_data (data: Dictionary) -> void:
+	if data.has("previous_screen_scene"):
+		_previous_screen_scene = data["previous_screen_scene"]
+	if data.has("previous_screen_data"):
+		_previous_screen_data = data["previous_screen_data"]
+	if data.has("category"):
+		_category = data["category"]
+	if data.has("transaction"):
+		_transaction = data["transaction"]
+	if data.has("category_colour"):
+		_category_colour = data["category_colour"]
 
 @onready var _category_icon: FontAwesome = $"./Stack/TitleRow/CategoryIcon"
 @onready var _category_name: Label = $"./Stack/TitleRow/CategoryName"
@@ -81,7 +95,10 @@ func _on_submit_pressed () -> void:
 			insertion_idx += 1
 		_category.transactions.insert(insertion_idx,_editable_model)
 	AppData.notify_changes()
-	Navigation.request_page(_previous_screen,null)
+	var previous_screen := _previous_screen_scene.instantiate()
+	previous_screen.set_data(_previous_screen_data)
+	Navigation.request_page(previous_screen,null)
+	queue_free()
 
 func _ready () -> void:
 	if _transaction != null:
@@ -107,3 +124,10 @@ func _ready () -> void:
 	_date_month_field.item_selected.connect(_on_date_month_changed)
 	_date_year_field.text_changed.connect(_on_date_year_changed)
 	_submit_button.pressed.connect(_on_submit_pressed)
+
+func _notification (what: int) -> void:
+	if (what == NOTIFICATION_WM_GO_BACK_REQUEST) || (what == NOTIFICATION_WM_CLOSE_REQUEST):
+		var previous_screen := _previous_screen_scene.instantiate()
+		previous_screen.set_data(_previous_screen_data)
+		Navigation.request_page(previous_screen,null)
+		queue_free()
