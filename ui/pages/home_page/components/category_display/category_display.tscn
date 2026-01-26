@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://3374gqlldcdd"]
+[gd_scene load_steps=12 format=3 uid="uid://3374gqlldcdd"]
 
 [ext_resource type="FontFile" uid="uid://fupb1gof1t0f" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="1_fjnh4"]
 [ext_resource type="FontFile" uid="uid://ikpk0y12oeif" path="res://themes/normal_regular.ttf" id="1_iwp8r"]
@@ -21,6 +21,8 @@ corner_radius_top_left = 500
 corner_radius_top_right = 500
 corner_radius_bottom_right = 500
 corner_radius_bottom_left = 500
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00vqq"]
 
 [node name="CategoryDisplay" type="MarginContainer"]
 offset_right = 40.0
@@ -89,3 +91,6 @@ text = "60.51 €"
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
+
+[node name="TouchDetector" type="TouchScreenButton" parent="."]
+shape = SubResource("RectangleShape2D_00vqq")

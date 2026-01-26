@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3sam71di8476"]
+[gd_scene load_steps=10 format=3 uid="uid://b3sam71di8476"]
 
 [ext_resource type="Script" uid="uid://dj8urvxfp37v3" path="res://ui/pages/category_view_page/category_view_page.gd" id="1_jj6jg"]
 [ext_resource type="Script" uid="uid://coh8ytklcqd2k" path="res://system/reocurring_transaction.gd" id="2_2im2n"]
@@ -11,6 +11,13 @@
 [sub_resource type="Resource" id="Resource_3pd2h"]
 script = ExtResource("3_erfx6")
 metadata/_custom_type_script = "uid://dwpyqy0hq2ylq"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3pd2h"]
+bg_color = Color(0.99607843, 0.98039216, 0.8784314, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
 
 [node name="CategoryViewPage" type="MarginContainer"]
 anchors_preset = 15
@@ -60,3 +67,36 @@ clip_text = true
 [node name="TitleMargin" type="MarginContainer" parent="Stack"]
 layout_mode = 2
 theme_override_constants/margin_bottom = 60
+
+[node name="HistoryGraph" type="PanelContainer" parent="Stack"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3pd2h")
+
+[node name="GraphPanelPadding" type="MarginContainer" parent="Stack/HistoryGraph"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="GraphPanelStack" type="VBoxContainer" parent="Stack/HistoryGraph/GraphPanelPadding"]
+layout_mode = 2
+
+[node name="GraphTitle" type="Label" parent="Stack/HistoryGraph/GraphPanelPadding/GraphPanelStack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "CATEGORY_HISTORY"
+
+[node name="GraphMargin" type="MarginContainer" parent="Stack/HistoryGraph/GraphPanelPadding/GraphPanelStack"]
+layout_mode = 2
+theme_override_constants/margin_top = 40
+
+[node name="GraphContainer" type="SubViewportContainer" parent="Stack/HistoryGraph/GraphPanelPadding/GraphPanelStack"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+stretch = true
+
+[node name="GraphVp" type="SubViewport" parent="Stack/HistoryGraph/GraphPanelPadding/GraphPanelStack/GraphContainer"]
+handle_input_locally = false
+size = Vector2i(830, 400)
+render_target_update_mode = 4

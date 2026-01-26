@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://h7ugvbiameim"]
+
+[ext_resource type="Script" uid="uid://b18ptu1sdaqch" path="res://ui/components/line_graph/line_graph.gd" id="1_ob5fw"]
+
+[node name="LineGraph" type="Node2D"]
+script = ExtResource("1_ob5fw")

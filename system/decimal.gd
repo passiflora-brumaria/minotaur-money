@@ -37,6 +37,9 @@ static func construct (integer_part_abs: int, decimal_digits: PackedInt32Array, 
 	new_dec._is_negative = negative
 	return new_dec
 
+static func from_float (source: float) -> Decimal:
+	return Decimal.parse(str(source),".")
+
 static func _invert_decimals (decimals: PackedInt32Array) -> int:
 	var carry: int = 0
 	for idx in range(len(decimals)):
@@ -102,6 +105,28 @@ static func add (factors: Array[Decimal]) -> Decimal:
 	result._get_decimal_part_string()
 	return result
 
+## Returns a copy of the maximum number among the arguments.
+static func maximum (args: Array[Decimal]) -> Decimal:
+	if len(args) == 0:
+		return null
+	else:
+		var result: Decimal = args[0]
+		for a in args:
+			if result.is_lesser_than(a):
+				result = a
+		return result.copy()
+
+## Returns a copy of the maximum number among the arguments.
+static func minimum (args: Array[Decimal]) -> Decimal:
+	if len(args) == 0:
+		return null
+	else:
+		var result: Decimal = args[0]
+		for a in args:
+			if a.is_lesser_than(result):
+				result = a
+		return result.copy()
+
 ## Gets the integer part of this number.
 func get_integer_part () -> int:
 	return _integer_part
@@ -156,6 +181,9 @@ func is_lesser_than (other: Decimal) -> bool:
 			return _is_negative
 	else:
 		return (_integer_part * (-1 if _is_negative else 1)) < (other._integer_part * (-1 if other._is_negative else 1))
+
+func to_float () -> float:
+	return float(_to_string(".",false))
 
 func _get_integer_part_string (separate_e3: bool = true) -> String:
 	var result = str(_integer_part)

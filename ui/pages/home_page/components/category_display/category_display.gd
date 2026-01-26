@@ -16,6 +16,8 @@ extends MarginContainer
 @export var _background_colour: Color
 
 var _lifetime: float = 0.0
+var _touched: bool = false
+var _touch_time: float = 0.0
 
 ## Sets the model data for this scene.
 func set_data (category: TransactionCategory, beginning_date: Date, ending_date: Date, category_colour: Color, background_colour: Color) -> void:
@@ -34,6 +36,19 @@ signal long_pressed ()
 @onready var _panel: PanelContainer = $"./CategoryStack/IconPanelCenterer/CategoryIconPanel"
 @onready var _icon: FontAwesome = $"./CategoryStack/IconPanelCenterer/CategoryIconPanel/CategoryIconCenterer/FontAwesome"
 @onready var _value: Label = $"./CategoryStack/Value"
+@onready var _touch_detector: TouchScreenButton = $"./TouchDetector"
+
+func _on_pressed () -> void:
+	if _lifetime > 0.1:
+		_touched = true
+		_touch_time = 0.0
+
+func _on_released () -> void:
+	_touched = false
+	if _touch_time > 0.5:
+		long_pressed.emit()
+	else:
+		pressed.emit()
 
 func _ready () -> void:
 	_title.text = _category.name
@@ -43,19 +58,15 @@ func _ready () -> void:
 	_icon.add_theme_color_override("font_color",_background_colour)
 	_value.text = _category.get_value(_beginning_date,_ending_date).to_string() + " €"
 	_value.add_theme_color_override("font_color",_category_colour)
+	_touch_detector.position = 0.5 * get_rect().size
+	_touch_detector.shape.size = get_rect().size
+	_touch_detector.pressed.connect(_on_pressed)
+	_touch_detector.released.connect(_on_released)
 
 func _process (delta: float) -> void:
 	if _lifetime < 1.0:
 		_lifetime += delta
-
-func _input (ev: InputEvent) -> void:
-	if _lifetime < 0.1:
-		return
-	if ev is InputEventMouseButton:
-		var mbev: InputEventMouseButton = ev
-		if (!mbev.pressed) && get_global_rect().encloses(Rect2(mbev.global_position,Vector2.ONE)):
-			match mbev.button_index:
-				MouseButton.MOUSE_BUTTON_LEFT:
-					pressed.emit()
-				MouseButton.MOUSE_BUTTON_RIGHT:
-					long_pressed.emit()
+	if _touched:
+		_touch_time += delta
+		if _touch_time > 1.0:
+			_on_released()
