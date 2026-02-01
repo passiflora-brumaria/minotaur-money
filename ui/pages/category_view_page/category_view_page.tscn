@@ -99,6 +99,7 @@ layout_mode = 2
 stretch = true
 
 [node name="GraphVp" type="SubViewport" parent="Stack/HistoryGraph/GraphPanelPadding/GraphPanelStack/GraphContainer"]
+transparent_bg = true
 handle_input_locally = false
 size = Vector2i(830, 400)
 render_target_update_mode = 4

@@ -97,7 +97,7 @@ func _ready () -> void:
 		func (value: Decimal): return value.to_string(),
 		func (x0: String, x1: String): return x0 < x1,
 		func (y: Decimal, histogram: Dictionary): return (y.to_float() / Decimal.maximum(histogram.values()).to_float()),
-		_graph_viewport.size
+		Vector2(830,400)
 	))
 	_view_button.pressed.connect(_on_transaction_history_requested)
 	_edit_button.pressed.connect(_on_category_edit_requested)
