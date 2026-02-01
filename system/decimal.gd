@@ -37,8 +37,13 @@ static func construct (integer_part_abs: int, decimal_digits: PackedInt32Array, 
 	new_dec._is_negative = negative
 	return new_dec
 
+## Creates a decimal number given a floating point number. Precision may be lost.
 static func from_float (source: float) -> Decimal:
 	return Decimal.parse(str(source),".")
+
+## Creates a zero-value decimal number.
+static func zero () -> Decimal:
+	return Decimal.construct(0,[],false)
 
 static func _invert_decimals (decimals: PackedInt32Array) -> int:
 	var carry: int = 0
@@ -183,7 +188,7 @@ func is_lesser_than (other: Decimal) -> bool:
 		return (_integer_part * (-1 if _is_negative else 1)) < (other._integer_part * (-1 if other._is_negative else 1))
 
 func to_float () -> float:
-	return float(_to_string(".",false))
+	return float(to_string_formatted(0,".",false))
 
 func _get_integer_part_string (separate_e3: bool = true) -> String:
 	var result = str(_integer_part)
@@ -203,9 +208,15 @@ func _get_decimal_part_string () -> String:
 		result += str(digit)
 	return result
 
-func _to_string (decimal_separator: String = ",", separate_thousands: bool = true) -> String:
+func _to_string () -> String:
+	return to_string_formatted(2,",",true)
+
+## Gets a string representation of this number.
+func to_string_formatted (minimum_decimal_digits: int = 0, decimal_separator: String = ",", separate_thousands: bool = true) -> String:
 	var prefix: String = "-" if _is_negative else ""
 	var decimal_string: String = _get_decimal_part_string()
+	while len(decimal_string) < minimum_decimal_digits:
+		decimal_string += "0"
 	if len(decimal_string) == 0:
 		return prefix + _get_integer_part_string(separate_thousands)
 	else:

@@ -37,6 +37,8 @@ func set_data (data: Dictionary) -> void:
 @onready var _category_name: Label = $"./Stack/TitleRow/CategoryName"
 @onready var _graph_panel: PanelContainer = $"./Stack/HistoryGraph"
 @onready var _graph_viewport: SubViewport = $"./Stack/HistoryGraph/GraphPanelPadding/GraphPanelStack/GraphContainer/GraphVp"
+@onready var _view_button: Button = $"./Stack/SeeTransactions"
+@onready var _edit_button: Button = $"./Stack/Edit"
 
 func _get_month_histogram () -> Dictionary[String,Decimal]:
 	var histogram: Dictionary[String,Decimal] = {}
@@ -49,7 +51,38 @@ func _get_month_histogram () -> Dictionary[String,Decimal]:
 			histogram[key] = Decimal.add([histogram[key],value])
 		else:
 			histogram[key] = value
+	if histogram.size() > 2:
+		var min_month: String = histogram.keys().min()
+		var max_month: String = histogram.keys().max()
+		var date_checker := Date.parse_iso(min_month)
+		while date_checker.is_prior_to(Date.parse_iso(max_month)):
+			if !histogram.has(date_checker.to_iso_string()):
+				histogram[date_checker.to_iso_string()] = Decimal.zero()
+			date_checker.add_month()
+			date_checker.day = Date.get_last_day_of_month(date_checker.year,date_checker.month)
+	elif histogram.size() == 1:
+		var date_checker := Date.parse_iso(histogram.keys().get(0))
+		if (date_checker.year == _date_of_visit.year) && (date_checker.month == _date_of_visit.month):
+			date_checker.add_months(-1)
+			date_checker.day = Date.get_last_day_of_month(date_checker.year,date_checker.month)
+			histogram[date_checker.to_iso_string()] = Decimal.zero()
+		else:
+			date_checker = _date_of_visit.copy()
+			date_checker.day = Date.get_last_day_of_month(date_checker.year,date_checker.month)
+			histogram[date_checker.to_iso_string()] = Decimal.zero()
+	elif histogram.size() == 0:
+		var date_checker := _date_of_visit.copy()
+		date_checker.add_days(-1)
+		histogram[date_checker.to_iso_string()] = Decimal.zero()
+		date_checker.add_day()
+		histogram[date_checker.to_iso_string()] = Decimal.zero()
 	return histogram
+
+func _on_transaction_history_requested () -> void: # TODO. To transaction history.
+	pass
+
+func _on_category_edit_requested () -> void: # TODO. To category edit.
+	pass
 
 func _ready () -> void:
 	_category_icon.icon_name = _category.get_icon()
@@ -60,12 +93,14 @@ func _ready () -> void:
 	graph_panel_box.bg_color = _category_colour
 	_graph_viewport.add_child(LineGraph.new(
 		_get_month_histogram() as Dictionary,
-		func (date_string: String): return tr("MONTH_" + str(Date.parse_iso(date_string).month).pad_zeros(2) + " " + str(Date.parse_iso(date_string).year)),
+		func (date_string: String): return tr("MONTH_" + str(Date.parse_iso(date_string).month).pad_zeros(2)) + " " + str(Date.parse_iso(date_string).year),
 		func (value: Decimal): return value.to_string(),
 		func (x0: String, x1: String): return x0 < x1,
-		func (y: Decimal, histogram: Dictionary): Decimal.from_float(y.to_float() / Decimal.maximum(histogram.values()).to_float()),
+		func (y: Decimal, histogram: Dictionary): return (y.to_float() / Decimal.maximum(histogram.values()).to_float()),
 		_graph_viewport.size
 	))
+	_view_button.pressed.connect(_on_transaction_history_requested)
+	_edit_button.pressed.connect(_on_category_edit_requested)
 
 # TODO. Screen where user can select whether to see category transaction history or to edit the transaction.
 

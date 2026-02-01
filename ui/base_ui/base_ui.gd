@@ -25,8 +25,8 @@ func _ready () -> void:
 		print("Decimal test 1: " + str(Decimal.parse("0.001",".").is_lesser_than(Decimal.parse("0.1","."))) + " should be true.")
 		print("Decimal test 2: " + Decimal.add([Decimal.parse("0.0001","."),Decimal.parse("-0.2",".")]).to_string() + " should be −0,1999.")
 		print("Decimal test 3: " + Decimal.add([Decimal.parse("3.01","."),Decimal.parse("-1.01","."),Decimal.parse("1.108","."),Decimal.parse("7.003","."),Decimal.parse("-5.0001","."),Decimal.parse("-6",".")]).to_string() + " should be −0,8891.")
-		print("Decimal test 4: " + Decimal.add([Decimal.parse("0","."),Decimal.parse("-0.1",".")]).to_string() + " should be −0,1.")
-		print("Decimal test 5: " + Decimal.add([Decimal.parse("10.00","."),Decimal.parse("-30.0",".")]).to_string() + " should be −20.")
+		print("Decimal test 4: " + Decimal.add([Decimal.parse("0","."),Decimal.parse("-0.1",".")]).to_string() + " should be −0,10.")
+		print("Decimal test 5: " + Decimal.add([Decimal.parse("10.00","."),Decimal.parse("-30.0",".")]).to_string() + " should be −20,00.")
 
 func _exit_tree () -> void:
 	Navigation.page_requested.disconnect(_on_page_changed)

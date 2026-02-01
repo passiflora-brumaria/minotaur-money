@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3sam71di8476"]
+[gd_scene load_steps=12 format=3 uid="uid://b3sam71di8476"]
 
 [ext_resource type="Script" uid="uid://dj8urvxfp37v3" path="res://ui/pages/category_view_page/category_view_page.gd" id="1_jj6jg"]
 [ext_resource type="Script" uid="uid://coh8ytklcqd2k" path="res://system/reocurring_transaction.gd" id="2_2im2n"]
@@ -7,6 +7,8 @@
 [ext_resource type="FontFile" uid="uid://fupb1gof1t0f" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="5_3pd2h"]
 [ext_resource type="Script" uid="uid://mpnoxbxbwvk4" path="res://addons/fontawesome/FontAwesome.gd" id="6_kh84y"]
 [ext_resource type="FontFile" uid="uid://8j3w1e1gsnrl" path="res://themes/normal_bold.ttf" id="7_br878"]
+[ext_resource type="Texture2D" uid="uid://pmt1bux4xvjb" path="res://icons/receipt-solid.svg" id="8_br878"]
+[ext_resource type="Texture2D" uid="uid://ugkw6wi7ew1g" path="res://icons/pen-solid.svg" id="9_lge2y"]
 
 [sub_resource type="Resource" id="Resource_3pd2h"]
 script = ExtResource("3_erfx6")
@@ -100,3 +102,27 @@ stretch = true
 handle_input_locally = false
 size = Vector2i(830, 400)
 render_target_update_mode = 4
+
+[node name="GraphMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 80
+
+[node name="SeeTransactions" type="Button" parent="Stack"]
+layout_mode = 2
+text = "SEE_TRANSACTIONS"
+icon = ExtResource("8_br878")
+alignment = 0
+icon_alignment = 2
+expand_icon = true
+
+[node name="ButtonGap" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 40
+
+[node name="Edit" type="Button" parent="Stack"]
+layout_mode = 2
+text = "EDIT_CATEGORY"
+icon = ExtResource("9_lge2y")
+alignment = 0
+icon_alignment = 2
+expand_icon = true
