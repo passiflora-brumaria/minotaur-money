@@ -5,7 +5,7 @@ class_name Account extends Resource
 @export var name: String
 
 ## Starting balance of the account at time of creation in the app.
-@export var starting_balance: Decimal = Decimal.construct(0,[],false)
+@export var starting_balance: Decimal = Decimal.zero()
 
 ## Transcaction categories which represent positive increments in money.
 @export var income_categories: Array[TransactionCategory] = []

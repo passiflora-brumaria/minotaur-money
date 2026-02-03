@@ -19,6 +19,7 @@ func set_data (data: Dictionary) -> void:
 @onready var _self_scene: PackedScene = preload("res://ui/pages/home_page/home_page.tscn")
 @onready var _transaction_edit_page_scene: PackedScene = preload("res://ui/pages/transaction_edit_page/transaction_edit_page.tscn")
 @onready var _category_view_page_scene: PackedScene = preload("res://ui/pages/category_view_page/category_view_page.tscn")
+@onready var _account_select_page_scene: PackedScene = preload("res://ui/pages/account_selection_page/account_selection_page.tscn")
 
 @onready var _account_select: Button = $"./Stack/AccountSelectPadding/AccountSelection"
 @onready var _balance: Label = $"./Stack/CurrentBalancePadding/CurrentBalance"
@@ -30,7 +31,9 @@ func set_data (data: Dictionary) -> void:
 var _swipe_gestures: Dictionary[int,Vector2]
 
 func _on_account_select () -> void:
-	print("Select account.") # TODO. Implement.
+	var account_select_page := _account_select_page_scene.instantiate()
+	Navigation.request_page(account_select_page,null) ## TODO. Addition FAB?
+	queue_free()
 
 func _on_category_tapped (category: TransactionCategory, colour: Color) -> void:
 	var transaction_page := _transaction_edit_page_scene.instantiate()

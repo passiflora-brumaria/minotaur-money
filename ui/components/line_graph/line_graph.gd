@@ -111,11 +111,8 @@ func _ready () -> void: # TODO. Implement.
 	var keys: Array = _histogram.keys()
 	keys.sort_custom(_x_sort)
 	for x in keys:
-		print("Getting graph point: x = " + _x_string_getter.call(x) + "; y = " + _y_string_getter.call(_histogram[x]))
 		data_points_x.append(_x_string_getter.call(x))
 		data_points_y.append(_y_magnitude.call(_histogram[x],_histogram))
-	print(data_points_x)
-	print(data_points_y)
 	var sorted_values := _histogram.values()
 	sorted_values.sort_custom( func (a, b): return _y_magnitude.call(a,_histogram) < _y_magnitude.call(b,_histogram) )
 	var minimum_y_magnitude: float = _y_magnitude.call(sorted_values.get(0),_histogram)
