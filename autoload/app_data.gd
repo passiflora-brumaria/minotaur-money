@@ -39,7 +39,7 @@ func _ready () -> void:
 		data = ResourceLoader.load("user://data.tres")
 	else:
 		data = UserData.new()
-		_load_defaults()
+		#_load_defaults()
 		ResourceSaver.save(data,"user://data.tres")
 	var current_day: Date = Date.now()
 	for acc in data.accounts:
@@ -53,6 +53,16 @@ func _ready () -> void:
 				var applications: Array[Transaction] = rec.create_appearences(current_day)
 				ec.transactions.append_array(applications)
 			ec.transactions.sort_custom( func (a: Transaction, b: Transaction): return a.date.is_prior_to(b.date) )
+	await get_tree().process_frame
+	if len(data.accounts) == 0:
+		var create_first_account: Control = load("res://ui/pages/account_edit_page/account_edit_page.tscn").instantiate()
+		create_first_account.set_data({
+			"account": null,
+			"previous_page_scene": null
+		})
+		Navigation.request_page(create_first_account,null)
+	else:
+		Navigation.request_page(load("res://ui/pages/home_page/home_page.tscn").instantiate(),null)
 
 ## Notify all subscriptors that changes have been made to the data.
 func notify_changes () -> void:

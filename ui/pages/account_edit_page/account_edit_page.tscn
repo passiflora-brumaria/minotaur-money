@@ -1,0 +1,115 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7qegswlcl2fu"]
+
+[ext_resource type="Script" uid="uid://b0fs87wcp45aq" path="res://ui/pages/account_edit_page/account_edit_page.gd" id="1_7ywem"]
+[ext_resource type="FontFile" uid="uid://fupb1gof1t0f" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_oumpe"]
+[ext_resource type="Script" uid="uid://mpnoxbxbwvk4" path="res://addons/fontawesome/FontAwesome.gd" id="3_jct5t"]
+[ext_resource type="FontFile" uid="uid://8j3w1e1gsnrl" path="res://themes/normal_bold.ttf" id="4_gnfsd"]
+
+[node name="AccountEditPage" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+script = ExtResource("1_7ywem")
+
+[node name="Stack" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleRow" type="HBoxContainer" parent="Stack"]
+layout_mode = 2
+
+[node name="PageIcon" type="Label" parent="Stack/TitleRow"]
+auto_translate_mode = 2
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_oumpe")
+theme_override_font_sizes/font_size = 48
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_jct5t")
+icon_size = 48
+icon_name = "pen"
+metadata/_custom_type_script = "uid://mpnoxbxbwvk4"
+
+[node name="TitleGap" type="MarginContainer" parent="Stack/TitleRow"]
+layout_mode = 2
+theme_override_constants/margin_right = 36
+
+[node name="AccountTitle" type="Label" parent="Stack/TitleRow"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_gnfsd")
+theme_override_font_sizes/font_size = 64
+text = "Category Name"
+vertical_alignment = 2
+clip_text = true
+
+[node name="TitleMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 60
+
+[node name="NameLabel" type="Label" parent="Stack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "ACCOUNT_NAME_EDIT_LABEL"
+
+[node name="NameGap" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 40
+
+[node name="NameEdit" type="LineEdit" parent="Stack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+
+[node name="NameMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 80
+
+[node name="ValueLabel" type="Label" parent="Stack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "ACCOUNT_INITIAL_BALANCE_EDIT_LABEL"
+
+[node name="ValueGap" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 40
+
+[node name="ValueEdit" type="HBoxContainer" parent="Stack"]
+layout_mode = 2
+
+[node name="Integer" type="LineEdit" parent="Stack/ValueEdit"]
+layout_mode = 2
+text = "0"
+alignment = 2
+virtual_keyboard_type = 2
+
+[node name="Comma" type="Label" parent="Stack/ValueEdit"]
+layout_mode = 2
+text = ","
+
+[node name="Decimal" type="LineEdit" parent="Stack/ValueEdit"]
+layout_mode = 2
+text = "00"
+virtual_keyboard_type = 2
+
+[node name="Currency" type="Label" parent="Stack/ValueEdit"]
+layout_mode = 2
+text = " €"
+
+[node name="ValueMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 80
+
+[node name="SubmitMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_top = 160
+
+[node name="Submit" type="Button" parent="Stack"]
+layout_mode = 2
+text = "SAVE_ACCOUNT"

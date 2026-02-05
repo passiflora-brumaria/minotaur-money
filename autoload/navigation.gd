@@ -4,7 +4,7 @@ extends Node
 signal page_requested (page: Control, fab: Control)
 
 func _process (_delta: float) -> void:
-	if Input.is_action_just_released("emulate_back_button"):
+	if Input.is_action_just_released("ui_cancel") || (OS.has_feature("debug") && Input.is_action_just_released("emulate_back_button")):
 		get_tree().get_first_node_in_group("__currentpage__").propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 
 ## Requests a page change wit the page UI and an optional floating action button.

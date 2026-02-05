@@ -30,3 +30,8 @@ SAVE_TRANSACTION,Save,Guardar,Desar
 CATEGORY_HISTORY,History,Histórico,Històric
 SEE_TRANSACTIONS,See Transactions,Ver Transacciones,Veure Transaccions
 EDIT_CATEGORY,Edit Category,Editar Categoría,Editar Categoria
+ADD_NEW_ACCOUNT,New Account,Nueva Cuenta,Nou Compte
+ACCOUNT_NAME_EDIT_LABEL,Account Name,Nombre de la Cuenta,Nom del Compte
+ACCOUNT_INITIAL_BALANCE_EDIT_LABEL,Starting Balance,Liquidez Inicial,Diners Inicials
+SAVE_ACCOUNT,Save,Guardar,Desar
+ADD_NEW_CATEGORY,New Category,Nueva Categoría,Nova Categoria

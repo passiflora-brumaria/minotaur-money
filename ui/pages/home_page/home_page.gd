@@ -50,7 +50,7 @@ func _on_category_tapped (category: TransactionCategory, colour: Color) -> void:
 	Navigation.request_page(transaction_page,null)
 	queue_free()
 
-func _on_category_long_pressed (category: TransactionCategory, colour: Color) -> void:
+func _on_category_long_pressed (category: TransactionCategory, is_income: bool, colour: Color) -> void:
 	var category_page := _category_view_page_scene.instantiate()
 	category_page.set_data({
 		"previous_screen_scene": _self_scene,
@@ -59,6 +59,7 @@ func _on_category_long_pressed (category: TransactionCategory, colour: Color) ->
 			"date_of_viewing": _date_of_viewing
 		},
 		"category": category,
+		"is_category_income": is_income,
 		"category_colour": colour,
 		"date_of_visit": _date_of_viewing
 	})
@@ -91,13 +92,13 @@ func _on_app_data_changed (_data_ref) -> void:
 		var cdisplay := _category_view_scene.instantiate()
 		cdisplay.set_data(ic,query_b,query_e,Color.from_string("#CCD5AE",Color.ALICE_BLUE),Color.from_string("#fefefe",Color.RED))
 		cdisplay.pressed.connect(_on_category_tapped.bind(ic,Color.from_string("#CCD5AE",Color.ALICE_BLUE)))
-		cdisplay.long_pressed.connect(_on_category_long_pressed.bind(ic,Color.from_string("#CCD5AE",Color.ALICE_BLUE)))
+		cdisplay.long_pressed.connect(_on_category_long_pressed.bind(ic,true,Color.from_string("#CCD5AE",Color.ALICE_BLUE)))
 		_category_grid.add_child(cdisplay)
 	for ec in _account.expense_categories:
 		var cdisplay := _category_view_scene.instantiate()
 		cdisplay.set_data(ec,query_b,query_e,Color.from_string("#D4A373",Color.ALICE_BLUE),Color.from_string("#fefefe",Color.RED))
 		cdisplay.pressed.connect(_on_category_tapped.bind(ec,Color.from_string("#D4A373",Color.ALICE_BLUE)))
-		cdisplay.long_pressed.connect(_on_category_long_pressed.bind(ec,Color.from_string("#D4A373",Color.ALICE_BLUE)))
+		cdisplay.long_pressed.connect(_on_category_long_pressed.bind(ec,false,Color.from_string("#D4A373",Color.ALICE_BLUE)))
 		_category_grid.add_child(cdisplay)
 
 func _ready () -> void:

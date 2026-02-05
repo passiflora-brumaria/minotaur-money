@@ -9,16 +9,20 @@ extends MarginContainer
 ## Category being viewed.
 @export var _category: TransactionCategory
 
+## Whether the category being viewed represents income (or expenses, otherwise).
+@export var _is_category_income: bool
+
 ## Colour associated with this category.
 @export var _category_colour: Color
 
 ## Date of visit, on which to base graphs and history reports.
 @export var _date_of_visit: Date
 
-## Sets te data necessary for view generation. Expects:
+## Sets the data necessary for view generation. Expects:
 ## "previous_screen_scene": [class PackedScene]
 ## "previous_screen_data": [class Dictionary]
 ## "category": [class TransactionCategory]
+## "is_category_income": [class bool]
 ## "category_colour": [class Color]
 ## "date_of_visit": [class Date]
 func set_data (data: Dictionary) -> void:
@@ -28,10 +32,15 @@ func set_data (data: Dictionary) -> void:
 		_previous_screen_data = data["previous_screen_data"]
 	if data.has("category"):
 		_category = data["category"]
+	if data.has("is_category_income"):
+		_is_category_income = data["is_category_income"]
 	if data.has("category_colour"):
 		_category_colour = data["category_colour"]
 	if data.has("date_of_visit"):
 		_date_of_visit = data["date_of_visit"]
+
+@onready var _self_scene: PackedScene = preload("res://ui/pages/category_view_page/category_view_page.tscn")
+@onready var _category_edit_page_scene: PackedScene = preload("res://ui/pages/category_edit_page/category_edit_page.tscn")
 
 @onready var _category_icon: FontAwesome = $"./Stack/TitleRow/CategoryIcon"
 @onready var _category_name: Label = $"./Stack/TitleRow/CategoryName"
@@ -81,8 +90,23 @@ func _get_month_histogram () -> Dictionary[String,Decimal]:
 func _on_transaction_history_requested () -> void: # TODO. To transaction history.
 	pass
 
-func _on_category_edit_requested () -> void: # TODO. To category edit.
-	pass
+func _on_category_edit_requested () -> void:
+	var page_scene := _category_edit_page_scene.instantiate()
+	page_scene.set_data({
+		"category": _category,
+		"is_income": _is_category_income,
+		"previous_page_scene": _self_scene,
+		"previous_page_data": {
+			"previous_screen_scene": _previous_screen_scene,
+			"previous_screen_data": _previous_screen_data,
+			"category": _category,
+			"is_category_income": _is_category_income,
+			"category_colour": _category_colour,
+			"date_of_visit": _date_of_visit
+		}
+	})
+	Navigation.request_page(page_scene,null)
+	queue_free()
 
 func _ready () -> void:
 	_category_icon.icon_name = _category.get_icon()
