@@ -41,3 +41,8 @@ EXPENSE_CATGR,Expenses,Gastos,Despeses
 INCOME_CATGR,Income,Ganancias,Guanys
 CATGR_ICON_EDIT_LABEL,Category Icon,Icono,Icona
 SAVE_CATEGORY,Save,Guardar,Desar
+RECURRENCE_EDIT_LABEL,Reocurrence,Recurrencia,Recurrència
+REC_NONE,No Repeats,Sin Repetir,Sense Repetició
+REC_WEEK,Every Week,Cada Semana,Cada Setmana
+REC_MONTH,Every Month,Cada Mes,Cada Mes
+REC_YEAR,Every Year,Cada Año,Cada Any

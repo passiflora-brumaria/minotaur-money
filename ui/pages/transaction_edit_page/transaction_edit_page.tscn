@@ -177,6 +177,32 @@ icon_size = 96
 icon_name = "calendar"
 metadata/_custom_type_script = "uid://mpnoxbxbwvk4"
 
+[node name="DateMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 80
+
+[node name="RecurrenceLabel" type="Label" parent="Stack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "RECURRENCE_EDIT_LABEL"
+
+[node name="RecurrenceGap" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 40
+
+[node name="RecurrenceEdit" type="OptionButton" parent="Stack"]
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "REC_NONE"
+popup/item_0/id = 0
+popup/item_1/text = "REC_WEEK"
+popup/item_1/id = 1
+popup/item_2/text = "REC_MONTH"
+popup/item_2/id = 2
+popup/item_3/text = "REC_YEAR"
+popup/item_3/id = 3
+
 [node name="SubmitMargin" type="MarginContainer" parent="Stack"]
 layout_mode = 2
 theme_override_constants/margin_top = 160
