@@ -1,6 +1,9 @@
 # Godot 4+ specific ignores
 .godot/
-/android/
+/android/*
+!/android/icons/
+/android/icons/*
+!/android/icons/public/
 *.apk
 *.aab
 *.apk.idsig
