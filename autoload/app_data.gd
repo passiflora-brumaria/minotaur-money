@@ -60,7 +60,7 @@ func _ready () -> void:
 			"account": null,
 			"previous_page_scene": null
 		})
-		Navigation.request_page(create_first_account,null)
+		Navigation.request_page(create_first_account,null,true)
 	else:
 		Navigation.request_page(load("res://ui/pages/home_page/home_page.tscn").instantiate(),null)
 

@@ -3,10 +3,12 @@ extends Node
 @onready var page_container: PanelContainer = $"./MainUiLayer/Background"
 @onready var fab_container: MarginContainer = $"./FloatingActionButtonLayer/MarginContainer"
 
-func _on_page_changed (page: Control, fab: Control) -> void:
+func _on_page_changed (page: Control, fab: Control, force_deletion_of_previous_page: bool = false) -> void:
 	while page_container.get_child_count() > 0:
 		var removable: Node = page_container.get_child(0)
 		page_container.remove_child(removable)
+		if force_deletion_of_previous_page:
+			removable.queue_free()
 	if fab_container.get_child_count() == 1:
 		var fab_to_remove: Node = fab_container.get_child(0)
 		fab_container.remove_child(fab_to_remove)

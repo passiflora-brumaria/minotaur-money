@@ -127,6 +127,9 @@ func _on_app_data_changed (_data_ref) -> void:
 	_category_grid.add_child(new_c_button_centerer)
 
 func _ready () -> void:
+	if (AppData.data == null) || (len(AppData.data.accounts) < 1):
+		var t := get_tree().create_timer(5.0)
+		await t.timeout
 	if _account != null:
 		AppData.data.accounts.push_front(_account)
 		var idx: int = 1

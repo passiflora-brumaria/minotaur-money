@@ -34,9 +34,13 @@ func _on_submitted () -> void:
 		AppData.data.accounts.erase(_account)
 	AppData.data.accounts.push_front(_editable_model)
 	AppData.notify_changes()
-	var previous_screen := _previous_page_scene.instantiate()
-	previous_screen.set_data(_previous_page_data)
-	Navigation.request_page(previous_screen,null)
+	if _previous_page_scene != null:
+		var previous_screen := _previous_page_scene.instantiate()
+		previous_screen.set_data(_previous_page_data)
+		Navigation.request_page(previous_screen,null)
+	else:
+		var home_page: Control = load("res://ui/pages/home_page/home_page.tscn").instantiate()
+		Navigation.request_page(home_page,null)
 	queue_free()
 
 func _on_cancelled () -> void:
