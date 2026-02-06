@@ -45,7 +45,7 @@ func _on_pressed () -> void:
 
 func _on_released () -> void:
 	_touched = false
-	if _touch_time > 0.5:
+	if _touch_time > 0.25:
 		long_pressed.emit()
 	else:
 		pressed.emit()

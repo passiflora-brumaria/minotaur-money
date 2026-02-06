@@ -18,7 +18,7 @@ func _on_pressed () -> void:
 	$"./Overlay".color = Color.from_rgba8(24,24,24,100)
 
 func _on_released () -> void:
-	if _press_duration > 1.0:
+	if _press_duration > 0.25:
 		edit_requested.emit(account)
 	elif _press_duration > -0.5:
 		details_requested.emit(account)
