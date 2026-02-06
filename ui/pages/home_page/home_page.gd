@@ -20,6 +20,7 @@ func set_data (data: Dictionary) -> void:
 @onready var _transaction_edit_page_scene: PackedScene = preload("res://ui/pages/transaction_edit_page/transaction_edit_page.tscn")
 @onready var _category_view_page_scene: PackedScene = preload("res://ui/pages/category_view_page/category_view_page.tscn")
 @onready var _account_select_page_scene: PackedScene = preload("res://ui/pages/account_selection_page/account_selection_page.tscn")
+@onready var _category_edit_page_scene: PackedScene = preload("res://ui/pages/category_edit_page/category_edit_page.tscn")
 
 @onready var _account_select: Button = $"./Stack/AccountSelectPadding/AccountSelection"
 @onready var _balance: Label = $"./Stack/CurrentBalancePadding/CurrentBalance"
@@ -66,6 +67,19 @@ func _on_category_long_pressed (category: TransactionCategory, is_income: bool, 
 	Navigation.request_page(category_page,null)
 	queue_free()
 
+func _on_new_category () -> void:
+	var next_page := _category_edit_page_scene.instantiate()
+	next_page.set_data({
+		"category": null,
+		"previous_page_scene": _self_scene,
+		"previous_page_data": {
+			"account": _account,
+			"date_of_viewing": _date_of_viewing
+		}
+	})
+	Navigation.request_page(next_page,null)
+	queue_free()
+
 func _on_previous_month () -> void:
 	_date_of_viewing.add_months(-1)
 	_on_app_data_changed(AppData.data)
@@ -100,6 +114,17 @@ func _on_app_data_changed (_data_ref) -> void:
 		cdisplay.pressed.connect(_on_category_tapped.bind(ec,Color.from_string("#D4A373",Color.ALICE_BLUE)))
 		cdisplay.long_pressed.connect(_on_category_long_pressed.bind(ec,false,Color.from_string("#D4A373",Color.ALICE_BLUE)))
 		_category_grid.add_child(cdisplay)
+	var new_c_button := TextureButton.new()
+	new_c_button.ignore_texture_size = true
+	new_c_button.stretch_mode = TextureButton.STRETCH_SCALE
+	new_c_button.texture_normal = load("res://icons/circle-plus-solid.svg")
+	new_c_button.custom_minimum_size = 100.0 * Vector2.ONE
+	new_c_button.pressed.connect(_on_new_category)
+	var new_c_button_centerer := CenterContainer.new()
+	new_c_button_centerer.add_child(new_c_button)
+	if _category_grid.get_child_count() > 0:
+		new_c_button_centerer.custom_minimum_size = (_category_grid.get_child(0) as Control).get_rect().size
+	_category_grid.add_child(new_c_button_centerer)
 
 func _ready () -> void:
 	if _account != null:

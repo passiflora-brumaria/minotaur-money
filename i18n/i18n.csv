@@ -35,3 +35,9 @@ ACCOUNT_NAME_EDIT_LABEL,Account Name,Nombre de la Cuenta,Nom del Compte
 ACCOUNT_INITIAL_BALANCE_EDIT_LABEL,Starting Balance,Liquidez Inicial,Diners Inicials
 SAVE_ACCOUNT,Save,Guardar,Desar
 ADD_NEW_CATEGORY,New Category,Nueva Categoría,Nova Categoria
+CATGR_NAME_EDIT_LABEL,Category Name,Nombre,Nom
+CATGR_TYPE_EDIT_LABEL,Category Type,Tipo de Valor,Tipus de Valor
+EXPENSE_CATGR,Expenses,Gastos,Despeses
+INCOME_CATGR,Income,Ganancias,Guanys
+CATGR_ICON_EDIT_LABEL,Category Icon,Icono,Icona
+SAVE_CATEGORY,Save,Guardar,Desar

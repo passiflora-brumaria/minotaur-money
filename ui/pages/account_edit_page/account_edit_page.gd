@@ -52,8 +52,10 @@ func _ready () -> void:
 		$"./Stack/TitleRow/AccountTitle".text = _editable_model.name
 	else:
 		_editable_model = Account.new()
+		_editable_model.name = ""
 		$"./Stack/TitleRow/PageIcon".icon_name = "circle-plus"
 		$"./Stack/TitleRow/AccountTitle".text = tr("ADD_NEW_ACCOUNT")
+	$"./Stack/NameEdit".text = _editable_model.name
 	$"./Stack/NameEdit".text_changed.connect(_on_name_changed)
 	if _editable_model.starting_balance == null:
 		_editable_model.starting_balance = Decimal.construct(0,[],false)
