@@ -1,7 +1,4 @@
 # Build application files
-*.apk
-*.apk.idsig
-*.aab
 
 # Godot 4+ specific ignores
 .godot/
