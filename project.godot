@@ -11,6 +11,11 @@ config_version=5
 [application]
 
 config/name="Minotaur Money"
+config/name_localized={
+"ca_ES": "Llibre Diari",
+"en_GB": "Money Tracker",
+"es_ES": "Libro Diario"
+}
 run/main_scene="uid://blvi2pwe0a4i7"
 config/auto_accept_quit=false
 config/quit_on_go_back=false
@@ -54,10 +59,12 @@ emulate_back_button={
 
 pointing/android/enable_long_press_as_right_click=true
 pointing/emulate_touch_from_mouse=true
+pointing/emulate_mouse_from_touch=false
 
 [internationalization]
 
 locale/translations=PackedStringArray("res://i18n/i18n.ca.translation", "res://i18n/i18n.en.translation", "res://i18n/i18n.es.translation")
+locale/locale_filter_mode=0
 
 [rendering]
 
