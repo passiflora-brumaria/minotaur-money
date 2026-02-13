@@ -21,6 +21,7 @@ func set_data (data: Dictionary) -> void:
 @onready var _category_view_page_scene: PackedScene = preload("res://ui/pages/category_view_page/category_view_page.tscn")
 @onready var _account_select_page_scene: PackedScene = preload("res://ui/pages/account_selection_page/account_selection_page.tscn")
 @onready var _category_edit_page_scene: PackedScene = preload("res://ui/pages/category_edit_page/category_edit_page.tscn")
+@onready var _history_page_scene: PackedScene = preload("res://ui/pages/transaction_history_page/transaction_history_page.tscn")
 
 @onready var _account_select: Button = $"./Stack/AccountSelectPadding/AccountSelection"
 @onready var _balance: Label = $"./Stack/CurrentBalancePadding/CurrentBalance"
@@ -34,6 +35,24 @@ var _swipe_gestures: Dictionary[int,Vector2]
 func _on_account_select () -> void:
 	var account_select_page := _account_select_page_scene.instantiate()
 	Navigation.request_page(account_select_page,null) ## TODO. Addition FAB?
+	queue_free()
+
+func _on_history_requested () -> void:
+	var page := _history_page_scene.instantiate()
+	var page_data: Array[TransactionHistoryEntry] = []
+	var title: String = _account.name
+	title += ": " + tr("MONTH_" + str(_date_of_viewing.month).pad_zeros(2)) + ", " + str(_date_of_viewing.year)
+	page.set_data({
+		"title": title,
+		"model": page_data,
+		"date_of_viewing": _date_of_viewing.copy(),
+		"previous_page_scene": _self_scene,
+		"previous_page_data": {
+			"account": _account,
+			"date_of_viewing": _date_of_viewing
+		}
+	})
+	Navigation.request_page(page,null)
 	queue_free()
 
 func _on_category_tapped (category: TransactionCategory, colour: Color) -> void:
@@ -145,6 +164,7 @@ func _ready () -> void:
 		_date_of_viewing = Date.now()
 	_swipe_gestures = {}
 	_account_select.pressed.connect(_on_account_select)
+	$"./Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack/Details".pressed.connect(_on_history_requested)
 	_on_app_data_changed(AppData.data)
 	AppData.data_changed.connect(_on_app_data_changed)
 

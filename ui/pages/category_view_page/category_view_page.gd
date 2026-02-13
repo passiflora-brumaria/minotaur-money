@@ -41,6 +41,7 @@ func set_data (data: Dictionary) -> void:
 
 @onready var _self_scene: PackedScene = preload("res://ui/pages/category_view_page/category_view_page.tscn")
 @onready var _category_edit_page_scene: PackedScene = preload("res://ui/pages/category_edit_page/category_edit_page.tscn")
+@onready var _history_page_scene: PackedScene = preload("res://ui/pages/transaction_history_page/transaction_history_page.tscn")
 
 @onready var _category_icon: FontAwesome = $"./Stack/TitleRow/CategoryIcon"
 @onready var _category_name: Label = $"./Stack/TitleRow/CategoryName"
@@ -87,8 +88,37 @@ func _get_month_histogram () -> Dictionary[String,Decimal]:
 		histogram[date_checker.to_iso_string()] = Decimal.zero()
 	return histogram
 
-func _on_transaction_history_requested () -> void: # TODO. To transaction history.
-	pass
+func _on_transaction_history_requested () -> void:
+	var page := _history_page_scene.instantiate()
+	var page_data: Array[TransactionHistoryEntry] = []
+	var query_b := _date_of_visit.copy()
+	query_b.day = 1
+	var query_e := _date_of_visit.copy()
+	query_e.day = Date.get_last_day_of_month(query_e.year,query_e.month)
+	for t in _category.transactions:
+		if query_b.is_prior_to(t.date,true) && t.date.is_prior_to(query_e,true):
+			page_data.push_back(ActualTransactionHistoryEntry.new(t,_category,_category_colour))
+	for pt in _category.recurring_transactions:
+		for p_tr in pt.foresee_future_appearences(query_e):
+			page_data.push_back(PlannedTransactionHistoryEntry.new(pt,p_tr.date,_category,_category_colour))
+	var title: String = _category.name
+	title += ": " + tr("MONTH_" + str(_date_of_visit.month).pad_zeros(2)) + ", " + str(_date_of_visit.year)
+	page.set_data({
+		"title": title,
+		"model": page_data,
+		"date_of_viewing": _date_of_visit.copy(),
+		"previous_page_scene": _self_scene,
+		"previous_page_data": {
+			"previous_screen_scene": _previous_screen_scene,
+			"previous_screen_data": _previous_screen_data,
+			"category": _category,
+			"is_category_income": _is_category_income,
+			"category_colour": _category_colour,
+			"date_of_visit": _date_of_visit
+		}
+	})
+	Navigation.request_page(page,null)
+	queue_free()
 
 func _on_category_edit_requested () -> void:
 	var page_scene := _category_edit_page_scene.instantiate()
@@ -125,8 +155,6 @@ func _ready () -> void:
 	))
 	_view_button.pressed.connect(_on_transaction_history_requested)
 	_edit_button.pressed.connect(_on_category_edit_requested)
-
-# TODO. Screen where user can select whether to see category transaction history or to edit the transaction.
 
 func _notification (what: int) -> void:
 	if (what == NOTIFICATION_WM_GO_BACK_REQUEST) || (what == NOTIFICATION_WM_CLOSE_REQUEST):

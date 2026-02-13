@@ -192,6 +192,14 @@ clip_text = true
 layout_mode = 2
 theme_override_constants/margin_bottom = 60
 
+[node name="Details" type="Button" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack"]
+layout_mode = 2
+text = "SEE_ACC_HISTORY"
+
+[node name="DetailsButtonMargin" type="MarginContainer" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 60
+
 [node name="AddTrTitle" type="Label" parent="Stack/MonthSummaryMargin/MonthSummary/MonthSummaryPadding/MonthSummaryStack"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48

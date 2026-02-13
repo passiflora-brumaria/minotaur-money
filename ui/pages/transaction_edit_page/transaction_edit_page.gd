@@ -109,6 +109,9 @@ func _on_submit_pressed () -> void:
 		if _transaction != null:
 			var original_idx: int = _category.transactions.find(_transaction)
 			_category.transactions.remove_at(original_idx)
+			_transaction.name = _editable_model.name
+			_transaction.date = _editable_model.date.copy()
+			_transaction.value = _editable_model.value.copy()
 		elif _add_recurrence:
 			var r := ReocurringTransaction.new()
 			r.blueprint = _editable_model.copy()

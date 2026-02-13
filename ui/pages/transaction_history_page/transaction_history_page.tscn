@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://2eo5naovkyyj"]
+
+[ext_resource type="Script" uid="uid://3s1yj3nx7pgr" path="res://ui/pages/transaction_history_page/transaction_history_page.gd" id="1_hqqua"]
+[ext_resource type="FontFile" uid="uid://fupb1gof1t0f" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_q04uo"]
+[ext_resource type="FontFile" uid="uid://8j3w1e1gsnrl" path="res://themes/normal_bold.ttf" id="2_s2um8"]
+[ext_resource type="Script" uid="uid://mpnoxbxbwvk4" path="res://addons/fontawesome/FontAwesome.gd" id="3_l4crq"]
+
+[node name="TransactionHistoryPage" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+script = ExtResource("1_hqqua")
+
+[node name="Stack" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleRow" type="HBoxContainer" parent="Stack"]
+layout_mode = 2
+
+[node name="PageIcon" type="Label" parent="Stack/TitleRow"]
+auto_translate_mode = 2
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_q04uo")
+theme_override_font_sizes/font_size = 48
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_l4crq")
+icon_size = 48
+icon_name = "receipt"
+metadata/_custom_type_script = "uid://mpnoxbxbwvk4"
+
+[node name="TitleGap" type="MarginContainer" parent="Stack/TitleRow"]
+layout_mode = 2
+theme_override_constants/margin_right = 36
+
+[node name="AccountTitle" type="Label" parent="Stack/TitleRow"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_s2um8")
+theme_override_font_sizes/font_size = 64
+text = "Category Name"
+vertical_alignment = 2
+clip_text = true
+
+[node name="TitleMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 20

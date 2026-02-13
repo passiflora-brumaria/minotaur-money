@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctc50ox55rbfw"]
+
+[ext_resource type="Script" uid="uid://dqu1rxd0y3mx7" path="res://ui/pages/transaction_history_page/components/transaction_history_entry_view/transaction_history_entry_view.gd" id="1_bi47i"]
+[ext_resource type="FontFile" uid="uid://8j3w1e1gsnrl" path="res://themes/normal_bold.ttf" id="2_1kuxp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1kuxp"]
+
+[node name="TransactionHistoryEntryView" type="MarginContainer"]
+custom_minimum_size = Vector2(930, 140)
+offset_right = 930.0
+offset_bottom = 123.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_bi47i")
+
+[node name="Title" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 70)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_1kuxp")
+theme_override_font_sizes/font_size = 48
+text = "Title"
+autowrap_mode = 2
+clip_text = true
+
+[node name="Subtitle" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "Subititle"
+vertical_alignment = 2
+autowrap_mode = 2
+clip_text = true
+
+[node name="Value" type="Label" parent="."]
+custom_minimum_size = Vector2(400, 70)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_1kuxp")
+theme_override_font_sizes/font_size = 48
+text = "0,20 EUR"
+horizontal_alignment = 2
+autowrap_mode = 2
+clip_text = true
+
+[node name="TapToEdit" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 24
+text = "TAP_TO_EDIT"
+horizontal_alignment = 2
+vertical_alignment = 2
+autowrap_mode = 2
+clip_text = true
+
+[node name="InteractiveOverlay" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="GestureDetector" type="TouchScreenButton" parent="."]
+shape = SubResource("RectangleShape2D_1kuxp")
