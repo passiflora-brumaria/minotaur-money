@@ -48,3 +48,6 @@ REC_MONTH,Every Month,Cada Mes,Cada Mes
 REC_YEAR,Every Year,Cada Año,Cada Any
 SEE_ACC_HISTORY,See Details,Ver Detalles,Veure Detalls
 TAP_TO_EDIT,Tap to Edit,Toca para Editar,Editar
+FROM_EDIT_LABEL,From,Desde,Des De
+TO_EDIT_LABEL,To,Hasta,Fins A
+INFINITE_RECR,Forever,Para Siempre,Per Sempre

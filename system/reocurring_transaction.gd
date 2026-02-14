@@ -38,7 +38,7 @@ func create_appearences (up_to: Date) -> Array[Transaction]:
 	var appearences: Array[Transaction] = []
 	while next_application.is_prior_to(up_to,true):
 		var instance: Transaction = blueprint.copy()
-		instance.date = next_application
+		instance.date = next_application.copy()
 		if (ending == null) || instance.date.is_prior_to(ending,true):
 			appearences.push_back(instance)
 		_move_application()
@@ -52,7 +52,7 @@ func foresee_future_appearences (up_to: Date) -> Array[Transaction]:
 	var future_application: Date = next_application.copy()
 	while future_application.is_prior_to(up_to,true):
 		var instance: Transaction = blueprint.copy()
-		instance.date = future_application
+		instance.date = future_application.copy()
 		if (ending == null) || instance.date.is_prior_to(ending,true):
 			appearences.push_back(instance)
 		match timescale:

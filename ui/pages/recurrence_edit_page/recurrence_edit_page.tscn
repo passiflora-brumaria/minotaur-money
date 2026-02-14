@@ -1,0 +1,165 @@
+[gd_scene load_steps=5 format=3 uid="uid://miwthepe6cv4"]
+
+[ext_resource type="Script" uid="uid://ca80p4ptijkwt" path="res://ui/pages/recurrence_edit_page/recurrence_edit_page.gd" id="1_jdrly"]
+[ext_resource type="FontFile" uid="uid://fupb1gof1t0f" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_vjfk2"]
+[ext_resource type="Script" uid="uid://mpnoxbxbwvk4" path="res://addons/fontawesome/FontAwesome.gd" id="3_ob10t"]
+[ext_resource type="FontFile" uid="uid://8j3w1e1gsnrl" path="res://themes/normal_bold.ttf" id="4_ijr5l"]
+
+[node name="RecurrenceEditPage" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 75
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 75
+theme_override_constants/margin_bottom = 75
+script = ExtResource("1_jdrly")
+
+[node name="Stack" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TitleRow" type="HBoxContainer" parent="Stack"]
+layout_mode = 2
+
+[node name="CategoryIcon" type="Label" parent="Stack/TitleRow"]
+auto_translate_mode = 2
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_vjfk2")
+theme_override_font_sizes/font_size = 48
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_ob10t")
+icon_size = 48
+icon_name = "pen"
+metadata/_custom_type_script = "uid://mpnoxbxbwvk4"
+
+[node name="TitleGap" type="MarginContainer" parent="Stack/TitleRow"]
+layout_mode = 2
+theme_override_constants/margin_right = 36
+
+[node name="Title" type="Label" parent="Stack/TitleRow"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_ijr5l")
+theme_override_font_sizes/font_size = 64
+text = "Category Name"
+vertical_alignment = 2
+clip_text = true
+
+[node name="TitleMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 60
+
+[node name="Value" type="Label" parent="Stack"]
+layout_mode = 2
+text = "77"
+
+[node name="ValueMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 80
+
+[node name="FromLabel" type="Label" parent="Stack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "FROM_EDIT_LABEL"
+
+[node name="FromGap" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 40
+
+[node name="From" type="Label" parent="Stack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "23 Feb., 2023"
+
+[node name="FromMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 80
+
+[node name="Inifinite" type="CheckButton" parent="Stack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "INFINITE_RECR"
+
+[node name="InfiniteMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 80
+
+[node name="DateLabel" type="Label" parent="Stack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "TO_EDIT_LABEL"
+
+[node name="MarginContainer" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 40
+
+[node name="DateEdit" type="HBoxContainer" parent="Stack"]
+layout_mode = 2
+
+[node name="DaySelect" type="OptionButton" parent="Stack/DateEdit"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+icon_alignment = 2
+expand_icon = true
+selected = 0
+item_count = 2
+popup/item_0/text = "22"
+popup/item_0/id = 0
+popup/item_1/text = "23"
+popup/item_1/id = 1
+
+[node name="DayMonthSeparator" type="Label" parent="Stack/DateEdit"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "/"
+
+[node name="MonthSelect" type="OptionButton" parent="Stack/DateEdit"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+icon_alignment = 2
+expand_icon = true
+selected = 0
+item_count = 2
+popup/item_0/text = "Maig"
+popup/item_0/id = 0
+popup/item_1/text = "23"
+popup/item_1/id = 1
+
+[node name="MonthYearSeparator" type="Label" parent="Stack/DateEdit"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "/"
+
+[node name="YearField" type="LineEdit" parent="Stack/DateEdit"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "8931"
+virtual_keyboard_type = 2
+
+[node name="YearFieldMargin" type="MarginContainer" parent="Stack/DateEdit"]
+layout_mode = 2
+theme_override_constants/margin_right = 80
+
+[node name="DateIcon" type="Label" parent="Stack/DateEdit"]
+auto_translate_mode = 2
+layout_mode = 2
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_vjfk2")
+theme_override_font_sizes/font_size = 96
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_ob10t")
+icon_size = 96
+icon_name = "calendar"
+metadata/_custom_type_script = "uid://mpnoxbxbwvk4"
+
+[node name="SubmitMargin" type="MarginContainer" parent="Stack"]
+layout_mode = 2
+theme_override_constants/margin_top = 160
+
+[node name="Submit" type="Button" parent="Stack"]
+layout_mode = 2
+text = "SAVE_TRANSACTION"

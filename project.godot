@@ -21,9 +21,9 @@ config/auto_accept_quit=false
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/bg_color=Color(0.99607843, 0.98039216, 0.8784314, 1)
+boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-boot_splash/image="uid://jh27yx00dykr"
 config/icon="uid://jh27yx00dykr"
 
 [autoload]

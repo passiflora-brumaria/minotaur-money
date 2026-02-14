@@ -35,6 +35,7 @@ func set_data (data: Dictionary) -> void:
 
 var _sorted_model: Array[TransactionHistoryEntry]
 var _transaction_edit_scene: PackedScene = preload("res://ui/pages/transaction_edit_page/transaction_edit_page.tscn")
+var _recurrence_edit_scene: PackedScene = preload("res://ui/pages/recurrence_edit_page/recurrence_edit_page.tscn")
 var _self_scene: PackedScene = preload("res://ui/pages/transaction_history_page/transaction_history_page.tscn")
 var _title_font: Font = preload("res://themes/normal_bold.ttf")
 var _entry_view_scene: PackedScene = preload("res://ui/pages/transaction_history_page/components/transaction_history_entry_view/transaction_history_entry_view.tscn")
@@ -54,6 +55,21 @@ func _on_edit (t: TransactionHistoryEntry) -> void:
 			"category": t.category,
 			"transaction": (t as ActualTransactionHistoryEntry).transaction,
 			"category_colour": t.get_colour()
+		})
+		Navigation.request_page(page,null)
+		queue_free()
+	else:
+		var page := _recurrence_edit_scene.instantiate()
+		page.set_data({
+			"previous_page_scene": _self_scene,
+			"previous_page_data": {
+				"title": _title,
+				"model": _model,
+				"date_of_viewing": _date_of_viewing,
+				"previous_page_scene": _previous_page_scene,
+				"previous_page_data": _previous_page_data
+			},
+			"model": (t as PlannedTransactionHistoryEntry).planned_transaction
 		})
 		Navigation.request_page(page,null)
 		queue_free()
@@ -110,7 +126,7 @@ func _ready () -> void:
 		var search_index: int = 0
 		var inserted: bool = 0
 		while (!inserted) && (search_index < len(_sorted_model)):
-			if _sorted_model.get(search_index).get_date().is_prior_to(m.get_date()):
+			if m.get_date().is_prior_to(_sorted_model.get(search_index).get_date()):
 				search_index += 1
 			else:
 				_sorted_model.insert(search_index,m)
