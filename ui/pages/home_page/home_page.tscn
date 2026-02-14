@@ -23,7 +23,7 @@ bg_color = Color(0.83137256, 0.6392157, 0.4509804, 1)
 corner_radius_top_right = 400
 corner_radius_bottom_right = 400
 
-[node name="HomePage" type="ScrollContainer"]
+[node name="HomePage" type="Container"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

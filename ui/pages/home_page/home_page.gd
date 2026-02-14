@@ -1,4 +1,4 @@
-extends ScrollContainer
+extends Container
 
 ## Account to summarise on this page.
 @export var _account: Account

@@ -1,6 +1,6 @@
 extends Node
 
-@onready var page_container: PanelContainer = $"./MainUiLayer/Background"
+@onready var page_container: ScrollContainer = $"./MainUiLayer/PageScroller"
 @onready var fab_container: MarginContainer = $"./FloatingActionButtonLayer/MarginContainer"
 
 func _on_page_changed (page: Control, fab: Control, force_deletion_of_previous_page: bool = false) -> void:
@@ -13,6 +13,8 @@ func _on_page_changed (page: Control, fab: Control, force_deletion_of_previous_p
 		var fab_to_remove: Node = fab_container.get_child(0)
 		fab_container.remove_child(fab_to_remove)
 	page_container.add_child(page)
+	page_container.scroll_vertical = 0
+	page_container.scroll_horizontal = 0
 	if fab != null:
 		fab_container.add_child(fab)
 
