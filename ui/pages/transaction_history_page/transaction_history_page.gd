@@ -78,6 +78,7 @@ func _build_view () -> void:
 	var previous_date: Date = null
 	for m in _sorted_model:
 		if (previous_date == null) || !m.get_date().equals(previous_date):
+			previous_date = m.get_date().copy()
 			var date_margin := MarginContainer.new()
 			date_margin.add_theme_constant_override("margin_bottom",40)
 			$"./Stack".add_child(date_margin)
